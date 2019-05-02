@@ -9,17 +9,13 @@ from models.map import Map
 from models.map import Map
 from models.position import Position
 
-"""This module contains the object Hero"""
-
-
-
 class Hero :
 	""" Generate the Hero of the game : MacGyver! """
 
 	def __init__(self, map):
 		""" initialisation class Hero"""
 		self.map = map
-		self.position = Position(0,0)
+		self.position = self.map.start
 		# self.map.start #return to method @property from class Map
 
 	@property
@@ -63,4 +59,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-

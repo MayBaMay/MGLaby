@@ -58,10 +58,16 @@ class Map :
                         self._walls.add(Position(x, y))
     @property
     def start(self):
-        """ transform set() into a list """
+        """ transform self._start (set()) into a list """
         return list(self._start)[0]
 
+    @property
+    def exit(self):
+        """ transform self._goal (set()) into a list """
+        return list(self._goal)[0]
+
     # @property
+    ## remarque je le trouve avec methode exit si goal au bout
     # def max_paths_coord(self):
     #     """gives size max of axis x and  y
     #       Purpose is to find out where we can add the elements of the syringe"""
