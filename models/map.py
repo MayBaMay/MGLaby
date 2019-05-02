@@ -82,10 +82,9 @@ class Map :
 
 def main():
     map = Map('data/maps/map.txt')
-    p = Position(0,0).right().down()
+    p = Position(0,0).right().right()
     print(p in map)
-    print(map.max_paths_coord)
+
 
 if  __name__ == "__main__":
     main()
-
