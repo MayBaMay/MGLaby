@@ -5,7 +5,7 @@ from random import randint
 
 from models.map import Map
 from models.position import Position
-from models.hero import Hero
+import models.characters
 
 """ This module generate elements for the syringe
 MacGyver has to make it with a needle, a small plastic cube and ether
@@ -34,10 +34,12 @@ class Syringe:
         places  = []            # used positions checking list
         for object in self.objects :
             while 1 :
-                place = Position(randint(0, 15),randint(0, 15))
-                if place in self.map :
-                    if place not in places :
-                        break
+                place = Position(randint(0, 14),randint(0, 3))
+                if place != Position(0,0):
+                    if place != self.map.exit:
+                        if place in self.map :
+                            if place not in places :
+                                break
             places.append(place)
             infos = [place, False]
             self.componants[object] = infos
@@ -65,13 +67,14 @@ class Syringe:
         for componant, info in self.componants.items() :
             if info[0] == self.hero.get_position :
                 self.componants[componant] = ['off', True]
-        return self.componants
+                return componant
 
     def check_making(self):
         """ check all the componant have been picked up"""
         flags = self.get_flags
         if False not in flags :
             self.syringe = True
+            return True
 
 def main():
     game = Map('data/maps/map.txt')
@@ -104,4 +107,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
