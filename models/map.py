@@ -33,26 +33,26 @@ class Map :
                     if c == constants.PATH_CHAR:
                         # if caracter correspond to PATH_CHAR constant defined in settings
                         # add a Position instance in the attribute _paths
-                        self._paths.add(Position(x, y))
+                        self._paths.add(Position(x*constants.SPRITES_SIZE, y*constants.SPRITES_SIZE))
                     elif c == constants.START_GAME:
                         # if caracter correspond to START_GAME constant defined in settings
                         # add a Position instance in the attribute _start
                         # and add a Position instance in the attribute _path
                             # cause you always can come back by this position
-                        self._paths.add(Position(x, y))
-                        self._start.add(Position(x, y))
+                        self._paths.add(Position(x*constants.SPRITES_SIZE, y*constants.SPRITES_SIZE))
+                        self._start.add(Position(x*constants.SPRITES_SIZE, y*constants.SPRITES_SIZE))
                     elif c == constants.GOAL_CHAR:
                         # if caracter correspond to GOAL_CHAR constant defined in settings
                         # add a Position instance in the attribute _goal
                         # and add a Position instance in the attribute _path
                             # cause you always can path again by this position
-                        self._paths.add(Position(x, y))
-                        self._goal.add(Position(x, y))
+                        self._paths.add(Position(x*constants.SPRITES_SIZE, y*constants.SPRITES_SIZE))
+                        self._goal.add(Position(x*constants.SPRITES_SIZE, y*constants.SPRITES_SIZE))
                     else:
                         # this is a wall
                         # we  choose not to create a list of the wall positon
                         # pass
-                        self._walls.add(Position(x, y))
+                        self._walls.add(Position(x*constants.SPRITES_SIZE, y*constants.SPRITES_SIZE))
     @property
     def start(self):
         """ transform self._start (set()) into a list """

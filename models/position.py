@@ -1,6 +1,8 @@
 
 """ This module allows all object in the programm to heve a position"""
 
+import config.settings as constants
+
 
 class Position :
     """generate object's position """
@@ -25,30 +27,35 @@ class Position :
         return hash(self.position)
 
     def up(self):
-        """ position lifted by 1"""
+        """ position lifted by 1 case"""
         x, y = self.position
-        return self.__class__(x-1, y)
+        return self.__class__((x-constants.SPRITES_SIZE), y)
 
     def down(self):
-        """ position lowered by 1 """
+        """ position lowered by 1 case"""
         x, y = self.position
-        return self.__class__(x+1, y)
+        return self.__class__((x+constants.SPRITES_SIZE), y)
 
     def right(self):
-        """ position moved by 1 towards the right """
+        """ position moved by 1 case towards the right """
         x, y = self.position
-        return self.__class__(x, y+1)
+        return self.__class__(x, (y+constants.SPRITES_SIZE))
 
     def left(self):
-        """ position moved by 1 towards the left """
+        """ position moved by 1 case towards the left """
         x, y = self.position
-        return self.__class__(x, y-1)
+        return self.__class__(x, (y-constants.SPRITES_SIZE))
+
+    @property
+    def get_position(self):
+        x, y = self.position
+        return (x, y)
 
 
 def main():
-    pos = Position(3, 4)
-    pos = pos.left().right().right().down().down().up()
-    print(pos)
+    pos = Position(0, 0)
+    pos = pos.right()
+    print(pos.get_position)
 
 
 if  __name__ == "__main__":

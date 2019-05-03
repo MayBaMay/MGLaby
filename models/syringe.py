@@ -4,11 +4,12 @@ MacGyver has to make it with a needle, a small plastic cube and ether
 Those elements will be found on the map randomly
 They will be used to distract the guard at the exit door"""
 
-from random import randint
+from random import randrange
 
+import config.settings as constants
 from models.map import Map
 from models.position import Position
-import models.characters
+from models.characters import Characters, Hero, Guard
 
 
 class Syringe:
@@ -32,7 +33,7 @@ class Syringe:
         places  = []            # used positions checking list
         for object in self.objects :
             while 1 :
-                place = Position(randint(0, 14),randint(0, 3))
+                place = Position(randrange(0, constants.LAST_POS, constants.SPRITES_SIZE),randrange(0, constants.LAST_POS, constants.SPRITES_SIZE))
                 if place != Position(0,0):
                     if place != self.map.exit:
                         if place in self.map :
