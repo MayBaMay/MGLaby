@@ -1,10 +1,7 @@
-#! /usr/bin/env python3
-# coding: utf-8
+"""This module rules characters of the game"""
 
 from models.map import Map
 from models.position import Position
-
-"""This module rules characters of the game"""
 
 
 class Characters:

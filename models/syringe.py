@@ -1,16 +1,14 @@
-#! /usr/bin/env python3
-# coding: utf-8
+
+""" This module generate elements for the syringe
+MacGyver has to make it with a needle, a small plastic cube and ether
+Those elements will be found on the map randomly
+They will be used to distract the guard at the exit door"""
 
 from random import randint
 
 from models.map import Map
 from models.position import Position
 import models.characters
-
-""" This module generate elements for the syringe
-MacGyver has to make it with a needle, a small plastic cube and ether
-Those elements will be found on the map randomly
-They will be used to distract the guard at the exit door"""
 
 
 class Syringe:
@@ -61,8 +59,6 @@ class Syringe:
         return flags
 
     def interaction_hero(self):
-        ### je sais pas très bien si ça doit être dans la classe...
-            #voire même si ça devrait pas être dans Hero...?
         """ if componant is on the same position as the hero, componant removed from the list"""
         for componant, info in self.componants.items() :
             if info[0] == self.hero.get_position :

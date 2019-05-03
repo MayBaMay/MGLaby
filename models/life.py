@@ -1,9 +1,6 @@
-#! /usr/bin/env python3
-# coding: utf-8
+""" Module to determine life esperance of the hero """
 
 from models.characters import Characters, Hero, Guard
-
-""" Module to determine life esperance of the hero """
 
 
 class Lifebar :

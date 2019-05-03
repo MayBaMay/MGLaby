@@ -1,5 +1,3 @@
-#! /usr/bin/env python3
-# coding: utf-8
 
 """ This module allows all object in the programm to heve a position"""
 

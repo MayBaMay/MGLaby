@@ -1,10 +1,7 @@
-#! /usr/bin/env python3
-# coding: utf-8
+""" This module creates the map of the game """
 
 import config.settings as constants
 from models.position import Position
-
-""" This module creates the map of the game """
 
 
 class Map :
