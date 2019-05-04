@@ -50,7 +50,11 @@ class Syringe:
         """ return all the class_objects positions"""
         pos = []
         for object in self.objects :
-            pos.append(self.componants[object][0])
+            if isinstance(self.componants[object][0], Position):
+                p = self.componants[object][0].get_position
+                pos.append(p)
+            else :
+                pos.append(self.componants[object][0])
         return pos
 
     @property
@@ -64,9 +68,10 @@ class Syringe:
     def interaction_hero(self):
         """ if componant is on the same position as the hero, componant removed from the list"""
         for componant, info in self.componants.items() :
-            if info[0] == self.hero.get_position :
-                self.componants[componant] = ['off', True]
-                return componant
+            if isinstance(info[0], Position):
+                if info[0].get_position == self.hero.get_position :
+                    self.componants[componant] = ['off', True]
+                    return componant
 
     def check_making(self):
         """ check all the componant have been picked up"""
@@ -80,34 +85,35 @@ def main():
     mg = Hero(game)
     sy = Syringe(game, mg)
 
-    print (constants.LAST_POS)
-    print(constants.SPRITES_SIZE)
     print(sy.get_positions)
-    print(mg.get_position)
 
-    # print("au début MG is :{}".format(mg.get_position))
-    # print(sy.get_positions)
-    # print(sy.get_flags)
-    # print(sy.interaction_hero())
-    # print(sy.get_positions)
-    # print(sy.get_flags, '\n')
-    # print(sy.check_making())
+    print("au début MG is :{}".format(mg.get_position))
+    print(sy.interaction_hero())
+    print(sy.check_making())
+    print(str(sy.componants))
+    print(sy.get_positions)
+    print("-------------------------")
+    mg.move("right")
+    print(sy.interaction_hero())
+    print(sy.check_making())
+    print(str(sy.componants))
+    print(sy.get_positions)
+    print("-------------------------")
+    mg.move("right")
+    print(sy.interaction_hero())
+    print(sy.check_making())
+    print(str(sy.componants))
+    print(sy.get_positions)
+    print("-------------------------")
+    mg.move("right")
+    print(sy.interaction_hero())
+    print(sy.check_making())
+    print(str(sy.componants))
+    print(sy.get_positions)
 
-    # mg.move("right")
-    # print(mg.get_position)
-    # print(sy.get_positions)
-    # print(sy.get_flags)
-    # print(sy.interaction_hero())
-    # print(sy.get_positions)
-    # print(sy.get_flags, '\n')
-    # print(sy.check_making())
-    #
-    # mg.move("right")
-    # print(mg.get_position)
-    # mg.move("right")
-    # print(mg.get_position)
-    # mg.move("right")
-    # print(mg.get_position)
+
+
+
 
 if __name__ == "__main__":
     main()
