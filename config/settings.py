@@ -1,10 +1,10 @@
 """ porgramm constants """
 
 # Windows config
-SPRITES_NB = 15
+SPRITES_NB = 5
 SPRITES_SIZE = 20
 WINDOW_SIDE = SPRITES_NB * SPRITES_SIZE
-LAST_POS = WINDOW_SIDE - WINDOW_SIDE
+LAST_POS = WINDOW_SIDE - SPRITES_SIZE
 WINDOW_TITLE = "MacGiver's Adventures!"
 
 # Labyrinthe SHAPE

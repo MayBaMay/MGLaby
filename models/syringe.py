@@ -33,7 +33,9 @@ class Syringe:
         places  = []            # used positions checking list
         for object in self.objects :
             while 1 :
-                place = Position(randrange(0, constants.LAST_POS, constants.SPRITES_SIZE),randrange(0, constants.LAST_POS, constants.SPRITES_SIZE))
+                randrange_x = randrange(0, constants.LAST_POS, constants.SPRITES_SIZE)
+                randrange_y = randrange(0, constants.LAST_POS, constants.SPRITES_SIZE)
+                place = Position(randrange_x,randrange_y)
                 if place != Position(0,0):
                     if place != self.map.exit:
                         if place in self.map :
@@ -74,17 +76,22 @@ class Syringe:
             return True
 
 def main():
-    game = Map('data/maps/map.txt')
+    game = Map('data/maps/map_test.txt')
     mg = Hero(game)
     sy = Syringe(game, mg)
 
-    print("au début MG is :{}".format(mg.get_position))
+    print (constants.LAST_POS)
+    print(constants.SPRITES_SIZE)
     print(sy.get_positions)
-    print(sy.get_flags)
-    print(sy.interaction_hero())
-    print(sy.get_positions)
-    print(sy.get_flags, '\n')
-    print(sy.check_making())
+    print(mg.get_position)
+
+    # print("au début MG is :{}".format(mg.get_position))
+    # print(sy.get_positions)
+    # print(sy.get_flags)
+    # print(sy.interaction_hero())
+    # print(sy.get_positions)
+    # print(sy.get_flags, '\n')
+    # print(sy.check_making())
 
     # mg.move("right")
     # print(mg.get_position)

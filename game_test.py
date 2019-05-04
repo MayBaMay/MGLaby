@@ -1,3 +1,4 @@
+
 #! /usr/bin/env python3
 # coding: utf-8
 
@@ -45,9 +46,12 @@ guard = Guard(map)
 sy = Syringe(map, hero)
 life = Lifebar(hero, 5, guard)
 user = ""
+print("seringe ", sy.get_positions)
 
 while user != "Q" :
     user = user_answer()
+    if hero.get_position in sy.get_positions:
+        print("putain!")
     get_syringe()
     if hero.get_position == guard.get_position:
         if check_syringe() :

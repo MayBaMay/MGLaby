@@ -16,7 +16,7 @@ class Characters:
 
     @property
     def get_position(self):
-        return self.position
+        return self.position.get_position
 
 
 class Hero(Characters):
@@ -50,7 +50,7 @@ def main():
     game = Map('data/maps/map.txt')
     mg = Hero(game)
     g = Guard(game)
-    print(g.get_position)
+    print(type(mg.get_position)  )
     print(mg.get_position)
     mg.move("right")
     print(mg.get_position)

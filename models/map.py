@@ -63,30 +63,31 @@ class Map :
         """ transform self._goal (set()) into a list """
         return list(self._goal)[0]
 
-    # @property
-    ## remarque je le trouve avec methode exit si goal au bout
-    # def max_paths_coord(self):
-    #     """gives size max of axis x and  y
-    #       Purpose is to find out where we can add the elements of the syringe"""
-    #     all_cases = self._paths | self._walls
-    #     all_cases  =  list(all_cases)
-        # max_tuple = max(all_cases, key=lambda x: x[0])
-        # # return list(all_cases)[len(all_cases)-1]
-        # # return max(list(all_cases))
-        # return max_tuple
-        ### bon je baisse les bras max() ne marche pas car à l'intérieur de la
-            #liste c'est des objets de classe class et pas des tuple simple
-            # mais si j'arrive à les transformer en tuple ça marcherait normalement
-                        # for e in all_cases:
-                        #     e = type(tuple)
-                        # return type(all_cases[0])
-                        ###marche pas du tout reste des objets class Position
+    @property
+    def paths(self):
+        paths = []
+        for e in self._paths:
+            e = e.get_position
+            paths.append(e)
+        return paths
 
+    @property
+    def walls(self):
+        walls = []
+        for e in self._walls:
+            e = e.get_position
+            walls.append(e)
+        return walls
 
 def main():
-    map = Map('data/maps/map.txt')
-    p = Position(0,0).right().right()
-    print(p in map)
+    map = Map('data/maps/map_test.txt')
+    p = Position(0,0).right().right().right()
+    print(type(map.exit.get_position),map.exit.get_position)
+    print(type(map.start.get_position),map.start.get_position)
+    print(map.paths,type(map.paths[3]))
+    print(map.walls,type(map.walls[3]))
+    # print(type(map.paths[3].get_position),map.start[3].get_position)
+    # print(p in map)
 
 
 if  __name__ == "__main__":
