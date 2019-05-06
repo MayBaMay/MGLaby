@@ -23,11 +23,12 @@ from models.syringe import Syringe
 from models.characters import Characters, Hero, Guard
 from models.life import Lifebar
 
-map = Map('data/maps/map.txt')
+map = Map('data/maps/map_test.txt')
 hero = Hero(map)
 
 
 pygame.init()
+
 
 window = pygame.display.set_mode((constants.WINDOW_SIDE, constants.WINDOW_SIDE))
 pygame.display.set_caption(constants.WINDOW_TITLE)
@@ -37,18 +38,17 @@ window.blit(fond, (0,0))
 
 pygame.display.flip()
 
-
+hero = Hero(map)
+hero_icon = pygame.image.load("ressources/MacGyver.png").convert_alpha()
+hero_icon = pygame.transform.scale(hero_icon, (20,20))
+hero_pos = hero.get_position
+window.blit(hero_icon, hero_pos)
+pygame.display.flip()
 
 continuer = True
 
 while continuer:
     pygame.time.Clock().tick(30)
-
-    h = pygame.image.load("ressources/MacGyver.png").convert_alpha()
-    h_pos = hero.get_position
-    window.blit(h, h_pos)
-
-    pygame.display.flip()
 
     for event in pygame.event.get():
 
@@ -59,17 +59,15 @@ while continuer:
         elif event.type == KEYDOWN:
             if event.key == K_RIGHT:
                 hero.move('right')
-
-                print(h_pos, hero.get_position)
+                print(hero.get_position)
             elif event.key == K_LEFT:
                 hero.move('left')
             elif event.key == K_UP:
                 hero.move('up')
-
             elif event.key == K_DOWN:
                 hero.move('down')
 
-
+    hero_pos = hero.get_position
     window.blit(fond, (0,0))
-    window.blit(h, h_pos)
+    window.blit(hero_icon, hero_pos)
     pygame.display.flip()

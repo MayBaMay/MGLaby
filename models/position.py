@@ -29,22 +29,22 @@ class Position :
     def up(self):
         """ position lifted by 1 case"""
         x, y = self.position
-        return self.__class__((x-constants.SPRITES_SIZE), y)
+        return self.__class__(x, (y-constants.SPRITES_SIZE))
 
     def down(self):
         """ position lowered by 1 case"""
         x, y = self.position
-        return self.__class__((x+constants.SPRITES_SIZE), y)
+        return self.__class__(x, (y+constants.SPRITES_SIZE))
 
     def right(self):
         """ position moved by 1 case towards the right """
         x, y = self.position
-        return self.__class__(x, (y+constants.SPRITES_SIZE))
+        return self.__class__((x+constants.SPRITES_SIZE), y)
 
     def left(self):
         """ position moved by 1 case towards the left """
         x, y = self.position
-        return self.__class__(x, (y-constants.SPRITES_SIZE))
+        return self.__class__((x-constants.SPRITES_SIZE), y)
 
     @property
     def get_position(self):

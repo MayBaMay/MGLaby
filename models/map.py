@@ -26,10 +26,10 @@ class Map :
     def load_from_file(self):
         """load datafile containing the shape of the map"""
         with open(self.filename) as f:
-            for x, line in enumerate(f):
-                # x = number of each line so x = y axis
-                for y, c in enumerate(line):
-                    # y = number of each column so y = x axis
+            for y, line in enumerate(f):
+                # y axis
+                for x, c in enumerate(line):
+                    #  x axis
                     if c == constants.PATH_CHAR:
                         # if caracter correspond to PATH_CHAR constant defined in settings
                         # add a Position instance in the attribute _paths
