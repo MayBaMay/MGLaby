@@ -2,7 +2,7 @@
 
 # Windows config
 SPRITES_NB = 5
-SPRITES_SIZE = 20
+SPRITES_SIZE = 40
 WINDOW_SIDE = SPRITES_NB * SPRITES_SIZE
 LAST_POS = WINDOW_SIDE - SPRITES_SIZE
 WINDOW_TITLE = "MacGiver's Adventures!"
@@ -20,8 +20,8 @@ IMG_WALL = "ressources/map/wall-stone-tiles.png"
 IMG_START = "ressources/map/start-tiles.png"
 IMG_GOAL = "ressources/map/stairs.png"
 # Characters:
-IMG_HERO = "ressources/characters/MacGyver.png"
-IMG_GUARD = "ressources/characters/Gardien.png"
+IMG_HERO = "ressources/MacGyver.png"
+IMG_GUARD = "ressources/Gardien.png"
 # Syringe:
 IMG_NEEDLE = "ressources/syringe/aiguille.png"
 IMG_TUBE = "ressources/syringe/tube_plastique.png"
