@@ -30,10 +30,13 @@ def get_syringe():
         print("you have found the {}, keep looking!".format(sy.interaction_hero()))
         if sy.check_making() == True :
             print("Bravo, you have the syringe, find the guardian!")
-    else :
+
+    if isinstance(sy.componants["needle"][0], Position):
         window.blit(needle_icon, needle_pos)
-        window.blit(ether_icon, ether_pos)
-        window.blit(tube_icon, tube_pos)
+    if isinstance(sy.componants["ether"][0], Position):
+            window.blit(ether_icon, ether_pos)
+    if isinstance(sy.componants["tube"][0], Position):
+            window.blit(tube_icon, tube_pos)
 
 
 def found_guard():
@@ -49,7 +52,7 @@ def win_loose(IMG):
     win_size = int(constants.WINDOW_SIDE/2)
     win_coord = (int(win_size/2), int(win_size/2))
     win_icon = pygame.transform.scale(win_icon, (win_size, win_size))
-    window.blit(win_icon, win_coord)
+    window.blit(IMG, win_coord)
 
 pygame.init()
 
