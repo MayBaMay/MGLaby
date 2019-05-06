@@ -1,10 +1,11 @@
-
 """ This module generate elements for the syringe
 MacGyver has to make it with a needle, a small plastic cube and ether
 Those elements will be found on the map randomly
 They will be used to distract the guard at the exit door"""
 
 from random import randrange
+import pygame
+from pygame.locals import *
 
 import config.settings as constants
 from models.map import Map
@@ -80,40 +81,24 @@ class Syringe:
             self.syringe = True
             return True
 
-def main():
-    game = Map('data/maps/map_test.txt')
-    mg = Hero(game)
-    sy = Syringe(game, mg)
-
-    print(sy.get_positions)
-
-    print("au début MG is :{}".format(mg.get_position))
-    print(sy.interaction_hero())
-    print(sy.check_making())
-    print(str(sy.componants))
-    print(sy.get_positions)
-    print("-------------------------")
-    mg.move("right")
-    print(sy.interaction_hero())
-    print(sy.check_making())
-    print(str(sy.componants))
-    print(sy.get_positions)
-    print("-------------------------")
-    mg.move("right")
-    print(sy.interaction_hero())
-    print(sy.check_making())
-    print(str(sy.componants))
-    print(sy.get_positions)
-    print("-------------------------")
-    mg.move("right")
-    print(sy.interaction_hero())
-    print(sy.check_making())
-    print(str(sy.componants))
-    print(sy.get_positions)
-
-
-
-
-
-if __name__ == "__main__":
-    main()
+    def view_objects(self, window):
+        # view needle
+        if isinstance(self.componants["needle"][0], Position):
+            needle_img = pygame.image.load(constants.IMG_NEEDLE).convert_alpha()
+            needle_img = pygame.transform.scale(needle_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
+            needle_pos = self.componants["needle"][0].get_position
+            window.blit(needle_img, needle_pos)
+        # view ether
+        if isinstance(self.componants["ether"][0], Position):
+            ether_img = pygame.image.load(constants.IMG_ETHER).convert()
+            ether_img.set_colorkey((1,1,1))
+            ether_img = pygame.transform.scale(ether_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
+            ether_pos = self.componants["ether"][0].get_position
+            window.blit(ether_img, ether_pos)
+        # view tube
+        if isinstance(self.componants["tube"][0], Position):
+            tube_img = pygame.image.load(constants.IMG_TUBE).convert()
+            tube_img.set_colorkey((255,255,255))
+            tube_img = pygame.transform.scale(tube_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
+            tube_pos = self.componants["tube"][0].get_position
+            window.blit(tube_img, tube_pos)

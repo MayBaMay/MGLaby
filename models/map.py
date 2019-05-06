@@ -1,5 +1,8 @@
 """ This module creates the map of the game """
 
+import pygame
+from pygame.locals import *
+
 import config.settings as constants
 from models.position import Position
 
@@ -79,16 +82,21 @@ class Map :
             walls.append(e)
         return walls
 
-def main():
-    map = Map('data/maps/map_test.txt')
-    p = Position(0,0).right().right().right()
-    print(type(map.exit.get_position),map.exit.get_position)
-    print(type(map.start.get_position),map.start.get_position)
-    print(map.paths,type(map.paths[3]))
-    print(map.walls,type(map.walls[3]))
-    # print(type(map.paths[3].get_position),map.start[3].get_position)
-    # print(p in map)
-
-
-if  __name__ == "__main__":
-    main()
+    def view_map(self, window):
+        # set walls
+        wall_img = pygame.image.load(constants.IMG_WALL).convert()
+        wall_img = pygame.transform.scale(wall_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
+        for position in self._walls :
+            wall_pos = position.get_position
+            window.blit(wall_img, wall_pos)
+        # set floor
+        paths_img = pygame.image.load(constants.IMG_FLOOR).convert()
+        paths_img = pygame.transform.scale(paths_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
+        for position in self._paths :
+            path_pos = position.get_position
+            window.blit(paths_img, path_pos)
+        #  set start case
+        start_img = pygame.image.load(constants.IMG_START).convert()
+        start_img = pygame.transform.scale(start_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
+        start_pos = self.start.get_position
+        window.blit(start_img, (0,0))

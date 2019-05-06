@@ -1,5 +1,8 @@
 """This module rules characters of the game"""
+import pygame
+from pygame.locals import *
 
+import config.settings as constants
 from models.map import Map
 from models.position import Position
 
@@ -13,10 +16,15 @@ class Characters:
         self.position = self.map.start      #return to method @property from class Map
         # default value self.map.start, will be different for guard
 
-
     @property
     def get_position(self):
         return self.position.get_position
+
+    def view_character(self, window, img):
+        char_img = pygame.image.load(img).convert_alpha()
+        char_img = pygame.transform.scale(char_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
+        char_pos = self.get_position
+        window.blit(char_img, char_pos)
 
 
 class Hero(Characters):
@@ -44,28 +52,3 @@ class Guard(Characters):
     def __init__(self, map):
         super().__init__(map)
         self.position = self.map.exit
-
-
-def main():
-    game = Map('data/maps/map.txt')
-    mg = Hero(game)
-    g = Guard(game)
-    print(type(mg.get_position)  )
-    print(mg.get_position)
-    mg.move("right")
-    print(mg.get_position)
-    mg.move("right")
-    print(mg.get_position)
-    mg.move("right")
-    print(mg.get_position)
-    mg.move("right")
-    print(mg.get_position)
-    mg.move("right")
-    print(mg.get_position)
-    mg.move("down")
-    print(mg.get_position)
-    mg.move("right")
-    print(mg.get_position)
-
-if __name__ == "__main__":
-    main()

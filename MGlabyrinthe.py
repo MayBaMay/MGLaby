@@ -1,5 +1,7 @@
-"""
+#! /usr/bin/env python3
+# coding: utf-8
 
+"""
 MacGyver Labyrinthe:
 Étant un grand fan de Richard Dean Anderson, vous imaginez un
 labyrinthe 2D dans lequel MacGyver aurait été enfermé.
@@ -31,13 +33,7 @@ def get_syringe():
         else :
             msg = "you have found the {}, keep looking!".format(sy.interaction_hero())
             message(msg, (255,255,255))
-
-    if isinstance(sy.componants["needle"][0], Position):
-        window.blit(needle_img, needle_pos)
-    if isinstance(sy.componants["ether"][0], Position):
-        window.blit(ether_img, ether_pos)
-    if isinstance(sy.componants["tube"][0], Position):
-        window.blit(tube_img, tube_pos)
+    sy.view_objects(window)
 
 
 def found_guard():
@@ -45,8 +41,12 @@ def found_guard():
         if sy.check_making() == True :
             message ("YOU WIN", (255,255,255))
         else :
-            return ("YOU'RE DEAD", (255,0,0))
-            game = 0
+            message ("YOU'RE DEAD", (255,0,0))
+            lose_img = pygame.image.load(constants.IMG_LOSE).convert_alpha()
+            lose_img = pygame.transform.scale(lose_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
+            window.blit(lose_img, guard.get_position)
+            # time.sleep(2) # ralenti à bouge le perso alors  qu'avant dans le code
+            quit()
 
 def text_objects(text, font, color):
     textSurface = font.render(text, True, color)
@@ -59,8 +59,7 @@ def message(text, color):
     window.blit(TextSurf, TextRect)
     pygame.display.update()
 
-    # time.sleep(2) # ralenti à refresh perso pas à message!!!
-
+    #time.sleep(2) # ralenti à refresh perso pas à message!!!
 
 pygame.init()
 
@@ -70,65 +69,15 @@ pygame.display.set_caption(constants.WINDOW_TITLE)
 
 # set map
 map = Map(constants.MAPFILE)
-
-# set walls
-wall_img = pygame.image.load(constants.IMG_WALL).convert()
-wall_img = pygame.transform.scale(wall_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
-for position in map._walls :
-    wall_pos = position.get_position
-    window.blit(wall_img, wall_pos)
-# set floor
-paths_img = pygame.image.load(constants.IMG_FLOOR).convert()
-paths_img = pygame.transform.scale(paths_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
-for position in map._paths :
-    path_pos = position.get_position
-    window.blit(paths_img, path_pos)
-#  set start case
-start_img = pygame.image.load(constants.IMG_START).convert()
-start_img = pygame.transform.scale(start_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
-start_pos = map.start.get_position
-window.blit(start_img, (0,0))
-
-pygame.display.flip()
-
-# set hero
+map.view_map(window)
 hero = Hero(map)
-hero_img = pygame.image.load(constants.IMG_HERO).convert_alpha()
-pygame.display.set_icon(hero_img)
-hero_img = pygame.transform.scale(hero_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
-hero_pos = hero.get_position
-window.blit(hero_img, hero_pos)
-
-# set guardian
+hero.view_character(window, constants.IMG_HERO)
 guard = Guard(map)
-# view guard
-guard_img = pygame.image.load(constants.IMG_GUARD).convert_alpha()
-guard_img = pygame.transform.scale(guard_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
-guard_pos = guard.get_position
-window.blit(guard_img, guard_pos)
-
-# set Syringe
+guard.view_character(window, constants.IMG_GUARD)
 sy = Syringe(map, hero)
-# view needle
-needle_img = pygame.image.load(constants.IMG_NEEDLE).convert_alpha()
-needle_img = pygame.transform.scale(needle_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
-needle_pos = sy.componants["needle"][0].get_position
-window.blit(needle_img, needle_pos)
-# view ether
-ether_img = pygame.image.load(constants.IMG_ETHER).convert()
-ether_img.set_colorkey((1,1,1))
-ether_img = pygame.transform.scale(ether_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
-ether_pos = sy.componants["ether"][0].get_position
-window.blit(ether_img, ether_pos)
-# view tube
-tube_img = pygame.image.load(constants.IMG_TUBE).convert()
-tube_img.set_colorkey((255,255,255))
-tube_img = pygame.transform.scale(tube_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
-tube_pos = sy.componants["tube"][0].get_position
-window.blit(tube_img, tube_pos)
+sy.view_objects(window)
 
 pygame.display.flip()
-
 
 game = True
 
@@ -150,28 +99,11 @@ while game:
             elif event.key == K_DOWN:
                 hero.move('down')
 
-    # reset the map
-    for position in map.walls :
-        wall_pos = position
-        window.blit(wall_img, wall_pos)
-    for position in map.paths :
-        path_pos = position
-        window.blit(paths_img, path_pos)
-    start_pos = map.start.get_position
-    window.blit(start_img, start_pos)
-
-    # reset hero(new position) & guard
-    hero_pos = hero.get_position
-    window.blit(guard_img, guard_pos)
-    window.blit(hero_img, hero_pos)
-
-    pygame.display.update()
+    map.view_map(window)
+    guard.view_character(window, constants.IMG_GUARD)
+    hero.view_character(window, constants.IMG_HERO)
 
     get_syringe()
     found_guard()
 
     pygame.display.update()       # refresh window
-
-game_loop()
-pygame.quit()
-quit()
