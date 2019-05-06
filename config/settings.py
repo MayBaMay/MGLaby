@@ -9,7 +9,7 @@ WINDOW_TITLE = "MacGiver's Adventures!"
 
 MAPFILE = 'data/maps/map.txt'
 
-# Labyrinthe SHAPE
+# Maze SHAPE
 START_GAME = 'S'
 GOAL_CHAR = 'G'
 PATH_CHAR = '.'
@@ -29,6 +29,5 @@ IMG_NEEDLE = "ressources/syringe/aiguille.png"
 IMG_TUBE = "ressources/syringe/tube_plastique.png"
 IMG_ETHER = "ressources/syringe/ether.png"
 
-# WIN / LOOSE:
-IMG_WIN = "ressources/You_win.png"
+# + :
 IMG_LOSE = "ressources/You_lose.png"

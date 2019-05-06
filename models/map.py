@@ -56,6 +56,7 @@ class Map :
                         # we  choose not to create a list of the wall positon
                         # pass
                         self._walls.add(Position(x*constants.SPRITES_SIZE, y*constants.SPRITES_SIZE))
+
     @property
     def start(self):
         """ transform self._start (set()) into a list """

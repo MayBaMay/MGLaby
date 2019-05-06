@@ -50,13 +50,3 @@ class Position :
     def get_position(self):
         x, y = self.position
         return (x, y)
-
-
-def main():
-    pos = Position(0, 0)
-    pos = pos.right()
-    print(pos.get_position)
-
-
-if  __name__ == "__main__":
-    main()
