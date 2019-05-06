@@ -33,9 +33,9 @@ def get_syringe():
     if isinstance(sy.componants["needle"][0], Position):
         window.blit(needle_icon, needle_pos)
     if isinstance(sy.componants["ether"][0], Position):
-            window.blit(ether_icon, ether_pos)
+        window.blit(ether_icon, ether_pos)
     if isinstance(sy.componants["tube"][0], Position):
-            window.blit(tube_icon, tube_pos)
+        window.blit(tube_icon, tube_pos)
 
 
 def found_guard():
