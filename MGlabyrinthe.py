@@ -9,7 +9,7 @@ ferait pâlir Tina Turner. Pour le distraire, il vous faut réunir les
 petit tube en plastique et de l'éther. Ils permettront à MacGyver de
 créer une seringue et d'endormir notre garde.
 
-Script Python
+Script Python 3.7.2
 Fichiers : à modifier
 """
 
@@ -48,7 +48,8 @@ def found_guard():
 def win_lose(IMG):
     win_icon = pygame.image.load(IMG).convert()
     win_icon.set_colorkey((1,1,1))
-    win_icon_pos = win_icon.get_rect(centerx=win_size)
+    center = constants.WINDOW_SIDE/2
+    win_icon_pos = win_icon.get_rect(centerx=center)
     window.blit(win_icon, win_icon_pos)
 
 
@@ -146,12 +147,13 @@ while game:
         win_size = int(constants.WINDOW_SIDE/2)
         textpos = text.get_rect(centerx=win_size)
         window.blit(text, textpos)
+        
     if get_syringe() == "NotComplete":
         font = pygame.font.Font(None, 36)
         txt  = "you have found the {}, keep looking!".format(sy.interaction_hero())
         text = font.render(txt, 1, (10, 10, 10))
-        win_size = int(constants.WINDOW_SIDE/2)
-        textpos = text.get_rect(centerx=win_size)
+        center = int(constants.WINDOW_SIDE/2)
+        textpos = text.get_rect(centerx=center)
         window.blit(text, textpos)
 
     if found_guard() == "win":
