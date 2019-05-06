@@ -21,15 +21,14 @@ from models.map import Map
 from models.position import Position
 from models.syringe import Syringe
 from models.characters import Characters, Hero, Guard
-from models.life import Lifebar
 
-print(((constants.WINDOW_SIDE),(constants.WINDOW_SIDE)))
 
 def get_syringe():
     if hero.get_position in sy.get_positions:
-        print("you have found the {}, keep looking!".format(sy.interaction_hero()))
         if sy.check_making() == True :
-            print("Bravo, you have the syringe, find the guardian!")
+            return "Complete"
+        else :
+            return "NotComplete"
 
     if isinstance(sy.componants["needle"][0], Position):
         window.blit(needle_icon, needle_pos)
@@ -49,10 +48,9 @@ def found_guard():
 def win_loose(IMG):
     win_icon = pygame.image.load(IMG).convert()
     win_icon.set_colorkey((1,1,1))
-    win_size = int(constants.WINDOW_SIDE/2)
-    win_coord = (int(win_size/2), int(win_size/2))
-    win_icon = pygame.transform.scale(win_icon, (win_size, win_size))
-    window.blit(IMG, win_coord)
+    win_icon_pos = pygame.get_rect(centerx=win_size)
+    window.blit(win_icon, win_icon_pos)
+
 
 pygame.init()
 
@@ -137,8 +135,6 @@ while game:
         path_pos = position.get_position
         window.blit(paths_icon, path_pos)
 
-    get_syringe()
-
     hero_pos = hero.get_position
     window.blit(guard_icon, guard_pos)
     window.blit(hero_icon, hero_pos)
@@ -146,5 +142,21 @@ while game:
         win_loose(constants.IMG_WIN)
     elif found_guard() == "dead":
         win_loose(constants.IMG_LOSE)
+        game = 0
+
+    if get_syringe() == "Complete":
+        ont = pygame.font.Font(None, 36)
+        txt  = "Bravo, you have the syringe, find the guardian!"
+        text = font.render(txt, 1, (10, 10, 10))
+        win_size = int(constants.WINDOW_SIDE/2)
+        textpos = text.get_rect(centerx=win_size)
+        window.blit(text, textpos)
+    if get_syringe() == "NotComplete":
+        font = pygame.font.Font(None, 36)
+        txt  = "you have found the {}, keep looking!".format(sy.interaction_hero())
+        text = font.render(txt, 1, (10, 10, 10))
+        win_size = int(constants.WINDOW_SIDE/2)
+        textpos = text.get_rect(centerx=win_size)
+        window.blit(text, textpos)
 
     pygame.display.flip()
