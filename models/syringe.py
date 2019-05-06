@@ -36,19 +36,19 @@ class Syringe:
                 randrange_x = randrange(0, constants.LAST_POS, constants.SPRITES_SIZE)
                 randrange_y = randrange(0, constants.LAST_POS, constants.SPRITES_SIZE)
                 place = Position(randrange_x,randrange_y)
-                if place != Position(0,0):
-                    if place != self.map.exit:
-                        if place in self.map :
-                            if place not in places :
+                if place != self.map.start:     # check out of start case
+                    if place != self.map.exit:      #  check out of exit case
+                        if place in self.map:           # check in available cases (paths)
+                            if place not in places :        # check not already used case
                                 break
             places.append(place)
             infos = [place, False]
-            self.componants[object] = infos
+            self.componants[object] = infos     #commponants  = {"objectName" : [coord, foundByHero]}
 
     @property
-    def get_positions(self):
+    def objects_positions(self):
         """ return all the class_objects positions"""
-        pos = []
+        pos = []            # get positions only
         for object in self.objects :
             if isinstance(self.componants[object][0], Position):
                 p = self.componants[object][0].get_position
@@ -60,7 +60,7 @@ class Syringe:
     @property
     def get_flags(self):
         """ return flags allowing to see if the hero passed through the case already"""
-        flags = []
+        flags = []              # get
         for object in self.objects :
             flags.append(self.componants[object][1])
         return flags
@@ -74,9 +74,9 @@ class Syringe:
                     return componant
 
     def check_making(self):
-        """ check all the componant have been picked up"""
+        """ check if all the componant have been picked up"""
         flags = self.get_flags
-        if False not in flags :
+        if False not in flags :         #so if the hero found all the componants
             self.syringe = True
             return True
 

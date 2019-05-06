@@ -10,9 +10,9 @@ class Characters:
     def __init__(self, map):
         """ initialisation class Characters"""
         self.map = map
-        self.position = self.map.start
+        self.position = self.map.start      #return to method @property from class Map
         # default value self.map.start, will be different for guard
-        # self.map.start #return to method @property from class Map
+
 
     @property
     def get_position(self):
