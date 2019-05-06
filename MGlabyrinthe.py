@@ -45,10 +45,10 @@ def found_guard():
         else :
             return "dead"
 
-def win_loose(IMG):
+def win_lose(IMG):
     win_icon = pygame.image.load(IMG).convert()
     win_icon.set_colorkey((1,1,1))
-    win_icon_pos = pygame.get_rect(centerx=win_size)
+    win_icon_pos = win_icon.get_rect(centerx=win_size)
     window.blit(win_icon, win_icon_pos)
 
 
@@ -138,11 +138,6 @@ while game:
     hero_pos = hero.get_position
     window.blit(guard_icon, guard_pos)
     window.blit(hero_icon, hero_pos)
-    if found_guard() == "win":
-        win_loose(constants.IMG_WIN)
-    elif found_guard() == "dead":
-        win_loose(constants.IMG_LOSE)
-        game = 0
 
     if get_syringe() == "Complete":
         ont = pygame.font.Font(None, 36)
@@ -158,5 +153,12 @@ while game:
         win_size = int(constants.WINDOW_SIDE/2)
         textpos = text.get_rect(centerx=win_size)
         window.blit(text, textpos)
+
+    if found_guard() == "win":
+        win_lose(constants.IMG_WIN)
+
+    if found_guard() == "dead":
+        win_lose(constants.IMG_LOSE)
+        game = 0
 
     pygame.display.flip()
