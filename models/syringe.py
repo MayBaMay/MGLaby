@@ -18,7 +18,7 @@ class Syringe:
     def __init__(self, map, hero):
         self.map = map
         self.hero = hero
-        self.objects = ['needle', 'cube', 'ether']
+        self.objects = ['needle', 'tube', 'ether']
         self.componants = {}
             # form self.componants will be :
             # {needle : [position , flag], cube : [position , flag] , ether : [position , flag]}

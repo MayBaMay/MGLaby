@@ -23,8 +23,35 @@ from models.syringe import Syringe
 from models.characters import Characters, Hero, Guard
 from models.life import Lifebar
 
-pygame.init()
+print(((constants.WINDOW_SIDE),(constants.WINDOW_SIDE)))
 
+def get_syringe():
+    if hero.get_position in sy.get_positions:
+        print("you have found the {}, keep looking!".format(sy.interaction_hero()))
+        if sy.check_making() == True :
+            print("Bravo, you have the syringe, find the guardian!")
+    else :
+        window.blit(needle_icon, needle_pos)
+        window.blit(ether_icon, ether_pos)
+        window.blit(tube_icon, tube_pos)
+
+
+def found_guard():
+    if hero.get_position == guard.get_position:
+        if sy.check_making() == True :
+            return "win"
+        else :
+            return "dead"
+
+def win_loose(IMG):
+    win_icon = pygame.image.load(IMG).convert()
+    win_icon.set_colorkey((1,1,1))
+    win_size = int(constants.WINDOW_SIDE/2)
+    win_coord = (int(win_size/2), int(win_size/2))
+    win_icon = pygame.transform.scale(win_icon, (win_size, win_size))
+    window.blit(win_icon, win_coord)
+
+pygame.init()
 
 
 # create pygame window
@@ -32,7 +59,7 @@ window = pygame.display.set_mode((constants.WINDOW_SIDE, constants.WINDOW_SIDE))
 pygame.display.set_caption(constants.WINDOW_TITLE)
 
 # set map
-map = Map('data/maps/map_test.txt')
+map = Map(constants.MAPFILE)
 
 wall_icon = pygame.image.load(constants.IMG_WALL).convert()
 wall_icon = pygame.transform.scale(wall_icon, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
@@ -60,24 +87,39 @@ guard_icon = pygame.image.load(constants.IMG_GUARD).convert_alpha()
 guard_icon = pygame.transform.scale(guard_icon, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
 guard_pos = guard.get_position
 window.blit(guard_icon, guard_pos)
-print (map.exit)
+
+# set Syringe
+sy = Syringe(map, hero)
+needle_icon = pygame.image.load(constants.IMG_NEEDLE).convert_alpha()
+needle_icon = pygame.transform.scale(needle_icon, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
+needle_pos = sy.componants["needle"][0].get_position
+window.blit(needle_icon, needle_pos)
+ether_icon = pygame.image.load(constants.IMG_ETHER).convert()
+ether_icon.set_colorkey((1,1,1))
+ether_icon = pygame.transform.scale(ether_icon, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
+ether_pos = sy.componants["ether"][0].get_position
+window.blit(ether_icon, ether_pos)
+tube_icon = pygame.image.load(constants.IMG_TUBE).convert()
+tube_icon.set_colorkey((255,255,255))
+tube_icon = pygame.transform.scale(tube_icon, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
+tube_pos = sy.componants["tube"][0].get_position
+window.blit(tube_icon, tube_pos)
+
 
 pygame.display.flip()
-continuer = True
+game = True
 
-while continuer:
+while game:
     pygame.time.Clock().tick(30)
 
     for event in pygame.event.get():
 
         if event.type == QUIT:
-            continuer_jeu = 0
-            continuer = 0
+            game = 0
 
         elif event.type == KEYDOWN:
             if event.key == K_RIGHT:
                 hero.move('right')
-                print(hero.get_position)
             elif event.key == K_LEFT:
                 hero.move('left')
             elif event.key == K_UP:
@@ -91,7 +133,15 @@ while continuer:
     for position in map._paths :
         path_pos = position.get_position
         window.blit(paths_icon, path_pos)
+
+    get_syringe()
+
     hero_pos = hero.get_position
     window.blit(guard_icon, guard_pos)
     window.blit(hero_icon, hero_pos)
+    if found_guard() == "win":
+        win_loose(constants.IMG_WIN)
+    elif found_guard() == "dead":
+        win_loose(constants.IMG_LOSE)
+
     pygame.display.flip()
