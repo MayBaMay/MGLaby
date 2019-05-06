@@ -20,7 +20,7 @@ WALL_CHAR = '#'
 IMG_FLOOR = "ressources/map/floor-stone-tiles.png"
 IMG_WALL = "ressources/map/wall-stone-tiles.png"
 IMG_START = "ressources/map/start-tiles.png"
-IMG_GOAL = "ressources/map/stairs.png"
+
 # Characters:
 IMG_HERO = "ressources/MacGyver.png"
 IMG_GUARD = "ressources/Gardien.png"
@@ -28,7 +28,6 @@ IMG_GUARD = "ressources/Gardien.png"
 IMG_NEEDLE = "ressources/syringe/aiguille.png"
 IMG_TUBE = "ressources/syringe/tube_plastique.png"
 IMG_ETHER = "ressources/syringe/ether.png"
-IMG_SYRINGE = "ressources/syringe/seringue.png"
 
 # WIN / LOOSE:
 IMG_WIN = "ressources/You_win.png"

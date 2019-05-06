@@ -73,6 +73,10 @@ paths_icon = pygame.transform.scale(paths_icon, (constants.SPRITES_SIZE,constant
 for position in map._paths :
     path_pos = position.get_position
     window.blit(paths_icon, path_pos)
+start_icon = pygame.image.load(constants.IMG_START).convert()
+start_icon = pygame.transform.scale(start_icon, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
+window.blit(start_icon, (0,0))
+
 
 pygame.display.flip()
 
@@ -129,12 +133,17 @@ while game:
             elif event.key == K_DOWN:
                 hero.move('down')
 
-    for position in map._walls :
-        wall_pos = position.get_position
+    for position in map.walls :
+        wall_pos = position
         window.blit(wall_icon, wall_pos)
-    for position in map._paths :
-        path_pos = position.get_position
+    for position in map.paths :
+        path_pos = position
         window.blit(paths_icon, path_pos)
+    start_icon = pygame.image.load(constants.IMG_START).convert()
+    start_icon = pygame.transform.scale(start_icon, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
+    start_pos = map.start.get_position
+    window.blit(start_icon, start_pos)
+
 
     hero_pos = hero.get_position
     window.blit(guard_icon, guard_pos)
@@ -147,7 +156,7 @@ while game:
         win_size = int(constants.WINDOW_SIDE/2)
         textpos = text.get_rect(centerx=win_size)
         window.blit(text, textpos)
-        
+
     if get_syringe() == "NotComplete":
         font = pygame.font.Font(None, 36)
         txt  = "you have found the {}, keep looking!".format(sy.interaction_hero())
