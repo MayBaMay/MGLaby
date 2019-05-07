@@ -26,7 +26,6 @@ from models.characters import Characters, Hero, Guard
 
 
 def get_syringe(window, hero, syringe):
-
     if hero.get_position in syringe.objects_positions:
         obj = syringe.interaction_hero()
         if syringe.check_making() == True :
@@ -69,7 +68,7 @@ def game_loop():
     window = pygame.display.set_mode((constants.WINDOW_SIDE, constants.WINDOW_SIDE))
     pygame.display.set_caption(constants.WINDOW_TITLE)
 
-    # set map
+    # create map
     map = Map(constants.MAPFILE)
     map.view_map(window)
     hero = Hero(map)
