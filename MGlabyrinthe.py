@@ -36,18 +36,21 @@ def get_syringe(window, hero, syringe):
     syringe.view_objects(window)
 
 
+### le projet s'arrête uniquement s'il il réunit les 3 objects
+### sinon il meurt (mais du coup le programme s'arrête aussi ou pas???!!!)
 def found_guard(window, hero, guard, syringe):
     if hero.get_position == guard.get_position:
         if syringe.check_making() == True :
             message (window, "YOU WIN", (255,255,255))
-            game_loop()
+            quit()
         else :
             message (window, "YOU'RE DEAD", (255,0,0))
             lose_img = pygame.image.load(constants.IMG_LOSE).convert_alpha()
             lose_img = pygame.transform.scale(lose_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
             window.blit(lose_img, guard.get_position)
             # time.sleep(2) # ralenti à bouge le perso alors  qu'avant dans le code
-            quit()
+            game_loop()
+
 
 def text_objects(text, font, color):
     textSurface = font.render(text, True, color)
