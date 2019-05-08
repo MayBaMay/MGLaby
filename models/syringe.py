@@ -22,7 +22,7 @@ class Syringe:
         self.objects = ['needle', 'tube', 'ether']
         self.componants = {}
             # form self.componants will be :
-            # {needle : [position , flag], cube : [position , flag] , ether : [position , flag]}
+            # {"needle" : [position , flag], "cube" : [position , flag] , "ether" : [position , flag]}
         self.syringe = False
 
         self.place_componants()
@@ -61,7 +61,7 @@ class Syringe:
     @property
     def get_flags(self):
         """ return flags allowing to see if the hero passed through the case already"""
-        flags = []              # get
+        flags = []      # list of flags which are True if the hero picked the object
         for object in self.objects :
             flags.append(self.componants[object][1])
         return flags
@@ -82,6 +82,9 @@ class Syringe:
             return True
 
     def view_objects(self, window):
+        """ generate objects in the pygame window
+        only if position still in his description
+        would be "off" if the hero picked it up """
         # view needle
         if isinstance(self.componants["needle"][0], Position):
             needle_img = pygame.image.load(constants.IMG_NEEDLE).convert_alpha()

@@ -21,7 +21,7 @@ class Position :
             return self.position == pos.position
 
     def __hash__(self):
-        """ allowed to return position into a hashable table (or dictionnary)"""
+        """ allow to return position into a hashable table (or dictionnary)"""
         # renvoi  un tuple de clé de dictionnaire
         # hash  possible que  si non mutabilité
         return hash(self.position)
@@ -48,5 +48,6 @@ class Position :
 
     @property
     def get_position(self):
+        """ returns position in the map as a coordinate tuple"""
         x, y = self.position
         return (x, y)

@@ -1,4 +1,4 @@
-""" porgramm constants """
+""" programm constants """
 
 # Windows config
 SPRITES_NB = 15

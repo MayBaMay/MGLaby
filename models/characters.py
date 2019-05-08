@@ -14,13 +14,16 @@ class Characters:
         """ initialisation class Characters"""
         self.map = map
         self.position = self.map.start      #return to method @property from class Map
-        # default value self.map.start, will be different for guard
+        # default value self.map.start, will be different for the guard
 
     @property
     def get_position(self):
+        """ call the get_position function from the class Position
+        to have the position as a tuple """
         return self.position.get_position
 
     def view_character(self, window, img):
+        """ generate the character in the pygame window """
         char_img = pygame.image.load(img).convert_alpha()
         char_img = pygame.transform.scale(char_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
         char_pos = self.get_position

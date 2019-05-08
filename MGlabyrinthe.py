@@ -30,9 +30,14 @@ def get_syringe(window, hero, syringe):
         obj = syringe.interaction_hero()
         if syringe.check_making() == True :
             message(window, "Bravo, you have the syringe, find the guardian!", (255,255,255))
+            pygame.display.update()
+            time.sleep(2)
         else :
             msg = "you have found the {}, keep looking!".format(obj)
             message(window, msg, (255,255,255))
+            pygame.display.update()
+            time.sleep(2)
+            game_loop()
     syringe.view_objects(window)
 
 
@@ -42,15 +47,16 @@ def found_guard(window, hero, guard, syringe):
     if hero.get_position == guard.get_position:
         if syringe.check_making() == True :
             message (window, "YOU WIN", (255,255,255))
+            time.sleep(2)
             quit()
         else :
             message (window, "YOU'RE DEAD", (255,0,0))
             lose_img = pygame.image.load(constants.IMG_LOSE).convert_alpha()
             lose_img = pygame.transform.scale(lose_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
             window.blit(lose_img, guard.get_position)
-            # time.sleep(2) # ralenti à bouge le perso alors  qu'avant dans le code
+            pygame.display.update()
+            time.sleep(2)
             game_loop()
-
 
 def text_objects(text, font, color):
     textSurface = font.render(text, True, color)
@@ -62,7 +68,6 @@ def message(window, text, color):
     TextRect.center = ((constants.WINDOW_SIDE/2),(constants.WINDOW_SIDE/2))
     window.blit(TextSurf, TextRect)
     pygame.display.update()
-    #time.sleep(2) # ralenti à refresh perso pas à message!!!
 
 def game_loop():
     pygame.init()

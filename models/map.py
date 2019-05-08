@@ -24,6 +24,7 @@ class Map :
         self.load_from_file()
 
     def __contains__(self, position):
+        """ returns only paths """
         return position in self._paths
 
     def load_from_file(self):
@@ -69,6 +70,7 @@ class Map :
 
     @property
     def paths(self):
+        """ transform self._paths (set()) into a list """
         paths = []
         for e in self._paths:
             e = e.get_position
@@ -77,6 +79,7 @@ class Map :
 
     @property
     def walls(self):
+        """ transform self._walls (set()) into a list """
         walls = []
         for e in self._walls:
             e = e.get_position
@@ -84,6 +87,7 @@ class Map :
         return walls
 
     def view_map(self, window):
+        """ generate the map in the pygame window """
         # set walls
         wall_img = pygame.image.load(constants.IMG_WALL).convert()
         wall_img = pygame.transform.scale(wall_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
