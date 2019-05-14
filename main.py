@@ -2,14 +2,13 @@
 # coding: utf-8
 
 """
-MacGyver Labyrinthe:
-Étant un grand fan de Richard Dean Anderson, vous imaginez un
-labyrinthe 2D dans lequel MacGyver aurait été enfermé.
-La sortie est surveillée par un garde du corps dont la coiffure
-ferait pâlir Tina Turner. Pour le distraire, il vous faut réunir les
-éléments suivants (dispersés dans le labyrinthe) : une aiguille, un
-petit tube en plastique et de l'éther. Ils permettront à MacGyver de
-créer une seringue et d'endormir notre garde.
+Dans le cadre du parcours de formation Développeur d’application Python, 
+nous cherchons à développer un petit jeu dans lequel MacGyver doit s’échapper 
+d’un labyrinthe dont la sortie est bloquée par un garde. MacGyver doit trouver 
+un moyen de s’échapper et pour se faire il doit trouver divers éléments, 
+aléatoirement placés dans le labyrinthe, pour fabriquer une seringue qui 
+servira à endormir le garde. Sans cela, MacGyver n’est pas assez fort pour 
+le vaincre et mourra, tel un héros mais mourra quand même...
 
 Script Python 3.7.2
 """
