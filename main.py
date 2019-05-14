@@ -26,6 +26,7 @@ from models.characters import Characters, Hero, Guard
 
 
 def get_syringe(window, hero, syringe):
+    """ this function checks if the hero passes through the same position as an element of the stringe """
     if hero.get_position in syringe.objects_positions:
         obj = syringe.interaction_hero()
         if syringe.check_making() == True :
@@ -37,18 +38,18 @@ def get_syringe(window, hero, syringe):
             message(window, msg, (255,255,255))
             pygame.display.update()
             time.sleep(2)
-            game_loop()
     syringe.view_objects(window)
 
 
 ### le projet s'arrête uniquement s'il il réunit les 3 objects
 ### sinon il meurt (mais du coup le programme s'arrête aussi ou pas???!!!)
 def found_guard(window, hero, guard, syringe):
+    """ the function check if the hero passes throught the position of the guard"""
     if hero.get_position == guard.get_position:
         if syringe.check_making() == True :
             message (window, "YOU WIN", (255,255,255))
             time.sleep(2)
-            quit()
+            quit()      # end of the program
         else :
             message (window, "YOU'RE DEAD", (255,0,0))
             lose_img = pygame.image.load(constants.IMG_LOSE).convert_alpha()
@@ -56,13 +57,15 @@ def found_guard(window, hero, guard, syringe):
             window.blit(lose_img, guard.get_position)
             pygame.display.update()
             time.sleep(2)
-            game_loop()
+            game_loop()     # the game reset
 
 def text_objects(text, font, color):
+    """ this function returns elements needed for a message """
     textSurface = font.render(text, True, color)
     return textSurface, textSurface.get_rect()
 
 def message(window, text, color):
+    """" this function allows the message to be printed on screen """
     infoText = pygame.font.Font(None,40)
     TextSurf, TextRect = text_objects(text, infoText, color)
     TextRect.center = ((constants.WINDOW_SIDE/2),(constants.WINDOW_SIDE/2))
