@@ -23,14 +23,15 @@ class Syringe:
         self.componants = {}
             # form self.componants will be :
             # {"needle" : [position , flag], "cube" : [position , flag] , "ether" : [position , flag]}
-        self.syringe = False
+            # flag : True=picked / False=not picked
+        self.syringe = False    #turns True when all objects had been picked
 
         self.place_componants()
 
     def place_componants(self):
         """ Instanciation of syringe's componants :
         They shouldn't be outside a path neither then at the same place
-        of an other """
+        of an other or start and goal postition """
         places  = []            # used positions checking list
         for object in self.objects :
             while 1 :
@@ -83,8 +84,8 @@ class Syringe:
 
     def view_objects(self, window):
         """ generate objects in the pygame window
-        only if position still in his description
-        would be "off" if the hero picked it up """
+        only if position still in the object values
+        would be "off" if the hero picked it up, or a class Position object if not """
         # view needle
         if isinstance(self.componants["needle"][0], Position):
             needle_img = pygame.image.load(constants.IMG_NEEDLE).convert_alpha()
