@@ -13,7 +13,7 @@ class Characters:
     def __init__(self, map):
         """ initialisation class Characters"""
         self.map = map
-        self.position = self.map.start      #return to method @property from class Map
+        self.position = self.map.start[0]      #return to method @property from class Map
         # default value self.map.start, will be different for the guard
 
     @property
@@ -54,4 +54,4 @@ class Guard(Characters):
 
     def __init__(self, map):
         super().__init__(map)
-        self.position = self.map.exit
+        self.position = self.map.goal[0]
