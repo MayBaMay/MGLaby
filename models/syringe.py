@@ -39,7 +39,7 @@ class Syringe:
                 randrange_y = randrange(0, constants.LAST_POS, constants.SPRITES_SIZE)
                 place = Position(randrange_x,randrange_y)
                 if place != self.map.start:     # check out of start case
-                    if place != self.map.exit:      #  check out of exit case
+                    if place != self.map.goal:      #  check out of exit case
                         if place in self.map:           # check in available cases (paths)
                             if place not in places :        # check not already used case
                                 break
