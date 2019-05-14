@@ -8,23 +8,13 @@ class Position :
     """generate object's position """
 
     def __init__(self, x, y):
-        """ initialisation with position defined by tuple (x, y)"""
+        """ initialisation with position defined with a tuple (x, y)"""
         self.position = (x, y)
-
-    def __repr__(self):
-        """ return position as a list of tuple when printed """
-        return str(self.position)
 
     def __eq__(self, pos):
         if isinstance(pos, Position): # if object still in the game
-            # compare two positions
+            # compare two object of this class with their attribut ".position"
             return self.position == pos.position
-
-    def __hash__(self):
-        """ allow to return position into a hashable table (or dictionnary)"""
-        # renvoi  un tuple de clé de dictionnaire
-        # hash  possible que  si non mutabilité
-        return hash(self.position)
 
     def up(self):
         """ position lifted by 1 case"""
