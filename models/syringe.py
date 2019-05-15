@@ -1,5 +1,5 @@
-""" This module generate elements for the syringe
-MacGyver has to make it with a needle, a small plastic cube and ether
+""" This module generates elements for the syringe
+MacGyver has to make it with a needle, a small plastic tube and ether
 Those elements will be found on the map randomly
 They will be used to distract the guard at the exit door"""
 
@@ -14,7 +14,7 @@ from models.characters import Characters, Hero, Guard
 
 
 class Syringe:
-    """Generate the elements for the syringe"""
+    """Generates elements for the syringe"""
 
     def __init__(self, map, hero):
         self.map = map
@@ -23,32 +23,33 @@ class Syringe:
         self.componants = {}
             # form self.componants will be :
             # {"needle" : [position , flag], "cube" : [position , flag] , "ether" : [position , flag]}
-        self.syringe = False
+            # flag : True=picked / False=not picked
+        self.syringe = False    #turns True when all objects had been picked
 
         self.place_componants()
 
     def place_componants(self):
         """ Instanciation of syringe's componants :
         They shouldn't be outside a path neither then at the same place
-        of an other """
+        of an other or start and goal postition """
         places  = []            # used positions checking list
         for object in self.objects :
             while 1 :
                 randrange_x = randrange(0, constants.LAST_POS, constants.SPRITES_SIZE)
                 randrange_y = randrange(0, constants.LAST_POS, constants.SPRITES_SIZE)
                 place = Position(randrange_x,randrange_y)
-                if place != self.map.start:     # check out of start case
-                    if place != self.map.exit:      #  check out of exit case
-                        if place in self.map:           # check in available cases (paths)
-                            if place not in places :        # check not already used case
+                if place != self.map.start[0]:     # check out of start sprite
+                    if place != self.map.goal[0]:      #  check out of exit sprite
+                        if place in self.map:            # check in available sprites (paths)
+                            if place not in places :        # check not already used sprite
                                 break
             places.append(place)
             infos = [place, False]
-            self.componants[object] = infos     #commponants  = {"objectName" : [coord, foundByHero]}
+            self.componants[object] = infos     #componants  = {"objectName" : [coord, foundByHero]}
 
     @property
     def objects_positions(self):
-        """ return all the class_objects positions"""
+        """ returns all the class_objects positions"""
         pos = []            # get positions only
         for object in self.objects :
             if isinstance(self.componants[object][0], Position):
@@ -60,7 +61,7 @@ class Syringe:
 
     @property
     def get_flags(self):
-        """ return flags allowing to see if the hero passed through the case already"""
+        """ returns flags allowing to check if the hero passed through the sprite already"""
         flags = []      # list of flags which are True if the hero picked the object
         for object in self.objects :
             flags.append(self.componants[object][1])
@@ -82,9 +83,9 @@ class Syringe:
             return True
 
     def view_objects(self, window):
-        """ generate objects in the pygame window
-        only if position still in his description
-        would be "off" if the hero picked it up """
+        """ generates objects in the pygame window
+        only if position still in the object's values
+        would be "off" if the hero picked it up, or a class Position object if not """
         # view needle
         if isinstance(self.componants["needle"][0], Position):
             needle_img = pygame.image.load(constants.IMG_NEEDLE).convert_alpha()
@@ -94,14 +95,14 @@ class Syringe:
         # view ether
         if isinstance(self.componants["ether"][0], Position):
             ether_img = pygame.image.load(constants.IMG_ETHER).convert()
-            ether_img.set_colorkey((1,1,1))
+            ether_img.set_colorkey((1,1,1))     # ignore black background
             ether_img = pygame.transform.scale(ether_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
             ether_pos = self.componants["ether"][0].get_position
             window.blit(ether_img, ether_pos)
         # view tube
         if isinstance(self.componants["tube"][0], Position):
             tube_img = pygame.image.load(constants.IMG_TUBE).convert()
-            tube_img.set_colorkey((255,255,255))
+            tube_img.set_colorkey((255,255,255))    # ignore white background
             tube_img = pygame.transform.scale(tube_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
             tube_pos = self.componants["tube"][0].get_position
             window.blit(tube_img, tube_pos)

@@ -2,16 +2,15 @@
 # coding: utf-8
 
 """
-MacGyver Labyrinthe:
-Étant un grand fan de Richard Dean Anderson, vous imaginez un
-labyrinthe 2D dans lequel MacGyver aurait été enfermé.
-La sortie est surveillée par un garde du corps dont la coiffure
-ferait pâlir Tina Turner. Pour le distraire, il vous faut réunir les
-éléments suivants (dispersés dans le labyrinthe) : une aiguille, un
-petit tube en plastique et de l'éther. Ils permettront à MacGyver de
-créer une seringue et d'endormir notre garde.
+Dans le cadre du parcours de formation Développeur d’application Python, 
+nous cherchons à développer un petit jeu dans lequel MacGyver doit s’échapper 
+d’un labyrinthe dont la sortie est bloquée par un garde. MacGyver doit trouver 
+un moyen de s’échapper et pour se faire il doit trouver divers éléments, 
+aléatoirement placés dans le labyrinthe, pour fabriquer une seringue qui 
+servira à endormir le garde. Sans cela, MacGyver n’est pas assez fort pour 
+le vaincre et meurt, tel un héros mais meurt quand même...
 
-Script Python 3.7.2
+Script Python 3.7.3
 """
 
 import pygame
@@ -26,56 +25,52 @@ from models.characters import Characters, Hero, Guard
 
 
 def get_syringe(window, hero, syringe):
+    """ this function checks if the hero passes through the same position as an element of the stringe """
     if hero.get_position in syringe.objects_positions:
         obj = syringe.interaction_hero()
         if syringe.check_making() == True :
-            message(window, "Bravo, you have the syringe, find the guardian!", (255,255,255))
-            pygame.display.update()
-            time.sleep(2)
+            message(window, "You made the syringe, find the guardian!", (0,255,0), 30)
         else :
             msg = "you have found the {}, keep looking!".format(obj)
             message(window, msg, (255,255,255))
-            pygame.display.update()
-            time.sleep(2)
     syringe.view_objects(window)
 
-
-### le projet s'arrête uniquement s'il il réunit les 3 objects
-### sinon il meurt (mais du coup le programme s'arrête aussi ou pas???!!!)
 def found_guard(window, hero, guard, syringe):
+    """ the function check if the hero passes throught the position of the guard"""
     if hero.get_position == guard.get_position:
         if syringe.check_making() == True :
-            message (window, "YOU WIN", (255,255,255))
-            time.sleep(2)
-            quit()
+            message (window, "YOU WIN", (0,255,0), 40)
+            quit()      # end of the program
         else :
-            message (window, "YOU'RE DEAD", (255,0,0))
             lose_img = pygame.image.load(constants.IMG_LOSE).convert_alpha()
             lose_img = pygame.transform.scale(lose_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
             window.blit(lose_img, guard.get_position)
-            pygame.display.update()
-            time.sleep(2)
-            game_loop()
+            message (window, "YOU'RE DEAD", (255,0,0), 40)
+            game_loop()     # the game reset
 
 def text_objects(text, font, color):
+    """ this function returns elements needed for a message """
     textSurface = font.render(text, True, color)
     return textSurface, textSurface.get_rect()
 
-def message(window, text, color):
-    infoText = pygame.font.Font(None,40)
+def message(window, text, color, size=20):
+    """" this function allows the message to be printed on screen """
+    infoText = pygame.font.Font(None, size)
     TextSurf, TextRect = text_objects(text, infoText, color)
     TextRect.center = ((constants.WINDOW_SIDE/2),(constants.WINDOW_SIDE/2))
     window.blit(TextSurf, TextRect)
-    pygame.display.update()
+    pygame.display.flip()
+    time.sleep(1)
 
 def game_loop():
+    """ main app in a function so you can call it to restart """
     pygame.init()
 
     # create pygame window
     window = pygame.display.set_mode((constants.WINDOW_SIDE, constants.WINDOW_SIDE))
     pygame.display.set_caption(constants.WINDOW_TITLE)
 
-    # create map
+    # create map, characters and objects
     map = Map(constants.MAPFILE)
     map.view_map(window)
     hero = Hero(map)
@@ -84,8 +79,6 @@ def game_loop():
     guard.view_character(window, constants.IMG_GUARD)
     sy = Syringe(map, hero)
     sy.view_objects(window)
-
-    pygame.display.flip()
 
     game = True
 
@@ -106,15 +99,18 @@ def game_loop():
                     hero.move('up')
                 elif event.key == K_DOWN:
                     hero.move('down')
-
+        
+        # reload visuels after event
         map.view_map(window)
         guard.view_character(window, constants.IMG_GUARD)
         hero.view_character(window, constants.IMG_HERO)
 
+        # check hero's interacion with objects and characters
         get_syringe(window, hero, sy)
         found_guard(window, hero, guard, sy)
 
-        pygame.display.update()       # refresh window
+        pygame.display.flip()       # refresh window with new elements
 
+        
 game_loop()
 quit()

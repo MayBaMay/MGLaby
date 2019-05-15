@@ -1,4 +1,5 @@
 """This module rules characters of the game"""
+
 import pygame
 from pygame.locals import *
 
@@ -13,13 +14,13 @@ class Characters:
     def __init__(self, map):
         """ initialisation class Characters"""
         self.map = map
-        self.position = self.map.start      #return to method @property from class Map
+        self.position = self.map.start[0]
         # default value self.map.start, will be different for the guard
 
     @property
     def get_position(self):
         """ call the get_position function from the class Position
-        to have the position as a tuple """
+        to use the position as a tuple """
         return self.position.get_position
 
     def view_character(self, window, img):
@@ -38,20 +39,19 @@ class Hero(Characters):
         super().__init__(map)
 
     def move(self, direction):
-        """ function for heroes movements in the map"""
+        """ function for hero's movements in the map"""
         new_position = getattr(self.position, direction)()
-        # getattr allowed acces an object properties with a string
-        # ex : getattr(self.position, "up") = applique la méthode up sur self.position
+        # getattr allows acces to object's properties with a string
+        # ex : getattr(self.position, "up") = call the method up on self.position
         if new_position in self.map:
+            # returns to function Map.__contains__ which had been limited to paths
             self.position = new_position
-            #  don't add a else cause if it's not in th map, self.position stay the same
-        # hero doesn't go through  the walls  neither
-        # cause new_position  is not in self.map (returns to function Map.__contains__)
-
+            # don't add an else cause if it's not in a path, self.position stay the same
+            
 
 class Guard(Characters):
     """ Generate the guard blocking the exit door """
 
     def __init__(self, map):
         super().__init__(map)
-        self.position = self.map.exit
+        self.position = self.map.goal[0]
