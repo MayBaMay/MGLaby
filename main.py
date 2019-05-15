@@ -8,7 +8,7 @@ d’un labyrinthe dont la sortie est bloquée par un garde. MacGyver doit trouve
 un moyen de s’échapper et pour se faire il doit trouver divers éléments, 
 aléatoirement placés dans le labyrinthe, pour fabriquer une seringue qui 
 servira à endormir le garde. Sans cela, MacGyver n’est pas assez fort pour 
-le vaincre et mourra, tel un héros mais mourra quand même...
+le vaincre et meurt, tel un héros mais meurt quand même...
 
 Script Python 3.7.3
 """
