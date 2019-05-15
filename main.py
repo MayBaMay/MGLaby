@@ -30,13 +30,9 @@ def get_syringe(window, hero, syringe):
         obj = syringe.interaction_hero()
         if syringe.check_making() == True :
             message(window, "Bravo, you have the syringe, find the guardian!", (255,255,255))
-            pygame.display.update()
-            time.sleep(2)
         else :
             msg = "you have found the {}, keep looking!".format(obj)
             message(window, msg, (255,255,255))
-            pygame.display.update()
-            time.sleep(2)
     syringe.view_objects(window)
 
 
@@ -47,15 +43,12 @@ def found_guard(window, hero, guard, syringe):
     if hero.get_position == guard.get_position:
         if syringe.check_making() == True :
             message (window, "YOU WIN", (255,255,255))
-            time.sleep(2)
             quit()      # end of the program
         else :
-            message (window, "YOU'RE DEAD", (255,0,0))
             lose_img = pygame.image.load(constants.IMG_LOSE).convert_alpha()
             lose_img = pygame.transform.scale(lose_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
             window.blit(lose_img, guard.get_position)
-            pygame.display.update()
-            time.sleep(2)
+            message (window, "YOU'RE DEAD", (255,0,0))
             game_loop()     # the game reset
 
 def text_objects(text, font, color):
@@ -69,7 +62,8 @@ def message(window, text, color):
     TextSurf, TextRect = text_objects(text, infoText, color)
     TextRect.center = ((constants.WINDOW_SIDE/2),(constants.WINDOW_SIDE/2))
     window.blit(TextSurf, TextRect)
-    pygame.display.update()
+    pygame.display.flip()
+    time.sleep(1)
 
 def game_loop():
     pygame.init()
@@ -117,7 +111,7 @@ def game_loop():
         get_syringe(window, hero, sy)
         found_guard(window, hero, guard, sy)
 
-        pygame.display.update()       # refresh window
+        pygame.display.flip()       # refresh window with new elements
 
 game_loop()
 quit()
