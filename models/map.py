@@ -11,10 +11,10 @@ class Map :
     """generate the map of the game"""
 
     def __init__(self, filename):
-        """ initialisation with datafile of the map"""
+        """ initialisation with datafile of the structure"""
 
         self.filename = filename
-
+        
         self.paths = []
         self.walls = []
         self.start = []
@@ -34,26 +34,26 @@ class Map :
                 for x, c in enumerate(line):
                     #  x axis
                     if c == constants.PATH_CHAR:
-                        # if caracter correspond to PATH_CHAR constant defined in settings
-                        # add a Position instance in the attribute _paths
+                        # if character correspond to PATH_CHAR constant defined in settings
+                        # add a Position instance in the attribute paths
                         self.paths.append(Position(x*constants.SPRITES_SIZE, y*constants.SPRITES_SIZE))
                     elif c == constants.START_GAME:
-                        # if caracter correspond to START_GAME constant defined in settings
-                        # add a Position instance in the attribute _start
-                        # and add a Position instance in the attribute _path
+                        # if character correspond to START_GAME constant defined in settings
+                        # add a Position instance in the attribute start
+                        # and add a Position instance in the attribute path
                             # cause you always can come back by this position
                         self.paths.append(Position(x*constants.SPRITES_SIZE, y*constants.SPRITES_SIZE))
                         self.start.append(Position(x*constants.SPRITES_SIZE, y*constants.SPRITES_SIZE))
                     elif c == constants.GOAL_CHAR:
-                        # if caracter correspond to GOAL_CHAR constant defined in settings
-                        # add a Position instance in the attribute _goal
-                        # and add a Position instance in the attribute _path
+                        # if character correspond to GOAL_CHAR constant defined in settings
+                        # add a Position instance in the attribute goal
+                        # and add a Position instance in the attribute path
                             # cause you always can path again by this position
                         self.paths.append(Position(x*constants.SPRITES_SIZE, y*constants.SPRITES_SIZE))
                         self.goal.append(Position(x*constants.SPRITES_SIZE, y*constants.SPRITES_SIZE))
                     elif c == constants.WALL_CHAR:
-                        # if caracter correspond to WALL_CHAR constant defined in settings
-                        # add a Position instance in the attribute _walls
+                        # if character correspond to WALL_CHAR constant defined in settings
+                        # add a Position instance in the attribute walls
                         self.walls.append(Position(x*constants.SPRITES_SIZE, y*constants.SPRITES_SIZE))
 
     def view_map(self, window):
