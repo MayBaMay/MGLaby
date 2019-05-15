@@ -4,7 +4,7 @@ Les aventures labyrinthiques de MacGyver
 
 
 
-Dans le cadre du parcours de formation Développeur d’application - Python, nous cherchons à développer un petit jeu dans lequel MacGyver doit s’échapper d’un labyrinthe dont la sortie est bloquée par un garde. MacGyver doit trouver un moyen de s’échapper et pour se faire il doit trouver divers éléments, aléatoirement placés dans le labyrinthe, pour fabriquer une seringue qui servira à endormir le garde. Sans cela, MacGyver n’est pas assez fort pour le vaincre et mourra, tel un héros mais mourra quand même...
+Dans le cadre du parcours de formation Développeur d’application - Python, nous cherchons à développer un petit jeu dans lequel MacGyver doit s’échapper d’un labyrinthe dont la sortie est bloquée par un garde. MacGyver doit trouver un moyen de s’échapper et pour se faire il doit trouver divers éléments, aléatoirement placés dans le labyrinthe, pour fabriquer une seringue qui servira à endormir le garde. Sans cela, MacGyver n’est pas assez fort pour le vaincre et meurt, tel un héros mais meurt quand même...
 
 
 Modification du dessin du labyrinthe :
