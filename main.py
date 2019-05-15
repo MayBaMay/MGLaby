@@ -10,7 +10,7 @@ aléatoirement placés dans le labyrinthe, pour fabriquer une seringue qui
 servira à endormir le garde. Sans cela, MacGyver n’est pas assez fort pour 
 le vaincre et mourra, tel un héros mais mourra quand même...
 
-Script Python 3.7.2
+Script Python 3.7.3
 """
 
 import pygame
@@ -29,7 +29,7 @@ def get_syringe(window, hero, syringe):
     if hero.get_position in syringe.objects_positions:
         obj = syringe.interaction_hero()
         if syringe.check_making() == True :
-            message(window, "Bravo, you have the syringe, find the guardian!", (255,255,255))
+            message(window, "You have the syringe, find the guardian!", (0,255,0), 30)
         else :
             msg = "you have found the {}, keep looking!".format(obj)
             message(window, msg, (255,255,255))
@@ -42,13 +42,13 @@ def found_guard(window, hero, guard, syringe):
     """ the function check if the hero passes throught the position of the guard"""
     if hero.get_position == guard.get_position:
         if syringe.check_making() == True :
-            message (window, "YOU WIN", (255,255,255))
+            message (window, "YOU WIN", (0,255,0), 40)
             quit()      # end of the program
         else :
             lose_img = pygame.image.load(constants.IMG_LOSE).convert_alpha()
             lose_img = pygame.transform.scale(lose_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
             window.blit(lose_img, guard.get_position)
-            message (window, "YOU'RE DEAD", (255,0,0))
+            message (window, "YOU'RE DEAD", (255,0,0), 40)
             game_loop()     # the game reset
 
 def text_objects(text, font, color):
@@ -56,9 +56,9 @@ def text_objects(text, font, color):
     textSurface = font.render(text, True, color)
     return textSurface, textSurface.get_rect()
 
-def message(window, text, color):
+def message(window, text, color, size=20):
     """" this function allows the message to be printed on screen """
-    infoText = pygame.font.Font(None,40)
+    infoText = pygame.font.Font(None, size)
     TextSurf, TextRect = text_objects(text, infoText, color)
     TextRect.center = ((constants.WINDOW_SIDE/2),(constants.WINDOW_SIDE/2))
     window.blit(TextSurf, TextRect)
