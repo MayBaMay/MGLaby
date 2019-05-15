@@ -29,7 +29,7 @@ def get_syringe(window, hero, syringe):
     if hero.get_position in syringe.objects_positions:
         obj = syringe.interaction_hero()
         if syringe.check_making() == True :
-            message(window, "You have the syringe, find the guardian!", (0,255,0), 30)
+            message(window, "You made the syringe, find the guardian!", (0,255,0), 30)
         else :
             msg = "you have found the {}, keep looking!".format(obj)
             message(window, msg, (255,255,255))
