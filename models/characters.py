@@ -4,8 +4,6 @@ import pygame
 from pygame.locals import *
 
 import config.settings as constants
-from models.map import Map
-from models.position import Position
 
 
 class Characters:
@@ -26,7 +24,8 @@ class Characters:
     def view_character(self, window, img):
         """ generate the character in the pygame window """
         char_img = pygame.image.load(img).convert_alpha()
-        char_img = pygame.transform.scale(char_img, (constants.SPRITES_SIZE,constants.SPRITES_SIZE))
+        char_img = pygame.transform.scale\
+                    (char_img, (constants.SPRITES_SIZE, constants.SPRITES_SIZE))
         char_pos = self.get_position
         window.blit(char_img, char_pos)
 
@@ -47,7 +46,7 @@ class Hero(Characters):
             # returns to function Map.__contains__ which had been limited to paths
             self.position = new_position
             # don't add an else cause if it's not in a path, self.position stay the same
-            
+
 
 class Guard(Characters):
     """ Generate the guard blocking the exit door """

@@ -6,7 +6,7 @@ That will allow us to use methods directly to those positions."""
 import config.settings as constants
 
 
-class Position :
+class Position:
     """generate object's position """
 
     def __init__(self, x, y):
