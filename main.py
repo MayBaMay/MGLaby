@@ -66,6 +66,7 @@ def message(window, text, color, size=20):
     time.sleep(1)
 
 def game_loop():
+    """ main app in a function so you can call it to restart """
     pygame.init()
 
     # create pygame window
@@ -81,8 +82,6 @@ def game_loop():
     guard.view_character(window, constants.IMG_GUARD)
     sy = Syringe(map, hero)
     sy.view_objects(window)
-
-    pygame.display.flip()
 
     game = True
 
