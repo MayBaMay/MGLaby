@@ -37,7 +37,6 @@ def get_syringe(window, hero, syringe):
             message(window, msg, (255,255,255))
             pygame.display.update()
             time.sleep(2)
-            game_loop()
     syringe.view_objects(window)
 
 
