@@ -57,9 +57,9 @@ def text_objects(text, font, color):
 def message(window, text, color, size=20):
     """" this function allows the message to be printed on screen """
     infoText = pygame.font.Font(None, size)
-    TextSurf, TextRect = text_objects(text, infoText, color)
-    TextRect.center = ((constants.WINDOW_SIDE/2), (constants.WINDOW_SIDE/2))
-    window.blit(TextSurf, TextRect)
+    textSurf, textRect = text_objects(text, infoText, color)
+    textRect.center = ((constants.WINDOW_SIDE/2), (constants.WINDOW_SIDE/2))
+    window.blit(textSurf, textRect)
     pygame.display.flip()
     time.sleep(1)
 
