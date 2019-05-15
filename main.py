@@ -35,9 +35,6 @@ def get_syringe(window, hero, syringe):
             message(window, msg, (255,255,255))
     syringe.view_objects(window)
 
-
-### le projet s'arrête uniquement s'il il réunit les 3 objects
-### sinon il meurt (mais du coup le programme s'arrête aussi ou pas???!!!)
 def found_guard(window, hero, guard, syringe):
     """ the function check if the hero passes throught the position of the guard"""
     if hero.get_position == guard.get_position:
