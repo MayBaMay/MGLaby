@@ -73,7 +73,7 @@ def game_loop():
     window = pygame.display.set_mode((constants.WINDOW_SIDE, constants.WINDOW_SIDE))
     pygame.display.set_caption(constants.WINDOW_TITLE)
 
-    # create map
+    # create map, characters and objects
     map = Map(constants.MAPFILE)
     map.view_map(window)
     hero = Hero(map)
@@ -102,15 +102,18 @@ def game_loop():
                     hero.move('up')
                 elif event.key == K_DOWN:
                     hero.move('down')
-
+        
+        # reload visuels after event
         map.view_map(window)
         guard.view_character(window, constants.IMG_GUARD)
         hero.view_character(window, constants.IMG_HERO)
 
+        # check hero's interacion with objects and characters
         get_syringe(window, hero, sy)
         found_guard(window, hero, guard, sy)
 
         pygame.display.flip()       # refresh window with new elements
 
+        
 game_loop()
 quit()
