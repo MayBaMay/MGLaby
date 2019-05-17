@@ -19,7 +19,7 @@ class Syringe:
         self.hero = hero
         self.objects = ['needle', 'tube', 'ether']
         self.componants = {}
-            # form self.componants will be : {"object_nam" : [position , flag]}
+            # form self.componants will be : {"object_name" : [position , flag]}
             # flag : True=picked / False=not picked
         self.syringe = False    #turns True when all objects had been picked
 

@@ -47,6 +47,7 @@ def found_guard(window, hero, guard, syringe):
                 (lose_img, (constants.SPRITES_SIZE, constants.SPRITES_SIZE))
             window.blit(lose_img, guard.get_position)
             message(window, "YOU'RE DEAD", (255, 0, 0), 40)
+            time.sleep(1)
             game_loop()     # the game reset
 
 def text_objects(text, font, color):
@@ -61,7 +62,7 @@ def message(window, text, color, size=20):
     textRect.center = ((constants.WINDOW_SIDE/2), (constants.WINDOW_SIDE/2))
     window.blit(textSurf, textRect)
     pygame.display.flip()
-    time.sleep(1)
+
 
 def game_loop():
     """ main app in a function so you can call it to restart """
@@ -80,11 +81,13 @@ def game_loop():
     guard.view_character(window, constants.IMG_GUARD)
     sy = Syringe(map, hero)
     sy.view_objects(window)
+    pygame.display.flip()
 
     game = True
 
     while game:
-        pygame.time.Clock().tick(60)
+
+        #pygame.time.Clock().tick(60)
 
         for event in pygame.event.get():
 
@@ -101,16 +104,18 @@ def game_loop():
                 elif event.key == K_DOWN:
                     hero.move('down')
 
-        # reload visuels after event
-        map.view_map(window)
-        guard.view_character(window, constants.IMG_GUARD)
-        hero.view_character(window, constants.IMG_HERO)
+                # reload visuels after event
+                map.view_map(window)
+                guard.view_character(window, constants.IMG_GUARD)
+                hero.view_character(window, constants.IMG_HERO)
 
-        # check hero's interacion with objects and characters
-        get_syringe(window, hero, sy)
-        found_guard(window, hero, guard, sy)
+                # check hero's interacion with objects and characters
+                get_syringe(window, hero, sy)
+                found_guard(window, hero, guard, sy)
 
-        pygame.display.flip()       # refresh window with new elements
+                pygame.display.flip()       # refresh window with new elements
+
+
 
 
 game_loop()
