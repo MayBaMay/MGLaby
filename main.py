@@ -14,6 +14,7 @@ Script Python 3.7.3
 """
 
 import time
+from random import randint
 import pygame
 from pygame.locals import *
 
@@ -73,7 +74,8 @@ def game_loop():
     pygame.display.set_caption(constants.WINDOW_TITLE)
 
     # create map, characters and objects
-    map = Map(constants.MAPFILE)
+    mapfile = constants.MAPFILE[randint(0,len(constants.MAPFILE)-1)]
+    map = Map(mapfile)
     map.view_map(window)
     hero = Hero(map)
     hero.view_character(window, constants.IMG_HERO)
@@ -86,8 +88,6 @@ def game_loop():
     game = True
 
     while game:
-
-        #pygame.time.Clock().tick(60)
 
         for event in pygame.event.get():
 
@@ -114,8 +114,6 @@ def game_loop():
                 found_guard(window, hero, guard, sy)
 
                 pygame.display.flip()       # refresh window with new elements
-
-
 
 
 game_loop()

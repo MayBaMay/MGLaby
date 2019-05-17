@@ -7,7 +7,7 @@ WINDOW_SIDE = SPRITES_NB * SPRITES_SIZE
 LAST_POS = WINDOW_SIDE - SPRITES_SIZE
 WINDOW_TITLE = "MacGiver's Adventures!"
 
-MAPFILE = 'data/maps/map.txt'
+MAPFILE = ['data/maps/map.txt', 'data/maps/map2.txt']
 
 # Maze SHAPE
 START_GAME = 'S'
