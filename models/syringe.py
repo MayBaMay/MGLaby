@@ -35,13 +35,14 @@ class Syringe:
                 randrange_x = randrange(0, constants.LAST_POS, constants.SPRITES_SIZE)
                 randrange_y = randrange(0, constants.LAST_POS, constants.SPRITES_SIZE)
                 place = Position(randrange_x, randrange_y)
-                if place != self.map.start[0] or place != self.map.goal[0]:     # check out of start sprite
-                    if place in self.map:            # check in available sprites (paths)
-                        if place not in places:        # check not already used sprite
-                            break
+                if place in self.map:            # check in available sprites (paths)
+                    if place not in self.map.start:     # check out of start sprite
+                        if place not in self.map.goal:      # check out of goal sprite
+                            if place not in places:              # check not already used sprite
+                                break
             places.append(place)
             infos = [place, False]
-            self.componants[object] = infos     #componants  = {"objectName" : [coord, foundByHero]}
+            self.componants[object] = infos
 
     @property
     def objects_positions(self):

@@ -41,6 +41,7 @@ def found_guard(window, hero, guard, syringe):
     if hero.get_position == guard.get_position:
         if syringe.check_making():
             message(window, "YOU WIN", (0, 255, 0), 40)
+            time.sleep(2)
             quit()      # end of the program
         else:
             lose_img = pygame.image.load(constants.IMG_LOSE).convert_alpha()
@@ -48,7 +49,7 @@ def found_guard(window, hero, guard, syringe):
                 (lose_img, (constants.SPRITES_SIZE, constants.SPRITES_SIZE))
             window.blit(lose_img, guard.get_position)
             message(window, "YOU'RE DEAD", (255, 0, 0), 40)
-            time.sleep(1)
+            time.sleep(2)
             game_loop()     # the game reset
 
 def text_objects(text, font, color):
