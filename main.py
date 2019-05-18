@@ -32,7 +32,7 @@ def get_syringe(window, hero, syringe):
         if syringe.check_making():
             message(window, "You made the syringe, find the guardian!", (0, 255, 0), 30)
         else:
-            msg = "you have found the {}, keep looking!".format(obj)
+            msg = "You have found the {}, keep looking!".format(obj)
             message(window, msg, (255, 255, 255))
     syringe.view_objects(window)
 
@@ -75,7 +75,7 @@ def game_loop():
     pygame.display.set_caption(constants.WINDOW_TITLE)
 
     # create map, characters and objects
-    mapfile = constants.MAPFILE[randint(0,len(constants.MAPFILE)-1)]
+    mapfile = constants.MAPFILES[randint(0,len(constants.MAPFILES)-1)]
     map = Map(mapfile)
     map.view_map(window)
     hero = Hero(map)
