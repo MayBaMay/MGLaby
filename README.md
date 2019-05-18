@@ -19,7 +19,7 @@ Dans le sous-répertoire config vous retrouverez le fichier pour modifier les pa
 - le nombre de cases du jeu (attention, il doit correspondre au dessin de votre labyrinthe contenu dans data/map)
 - la taille des cases du jeu
 - le titre du jeu
-- les chemin d'accès aux dessins des labyrinthes (compléter la liste MAPFILES dans data/map)
+- les chemins d'accès aux dessins des labyrinthes (compléter la liste MAPFILES dans data/map)
 - les caractères spéciaux représentant les éléments du labyrinthe
 - les chemins des différentes images utilisées pour représenter les éléments du labyrinthe (personnages, cases, objets...)
 
