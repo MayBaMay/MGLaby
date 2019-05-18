@@ -9,7 +9,7 @@ Dans le cadre du parcours de formation Développeur d’application - Python, no
 
 Modification du dessin du labyrinthe :
 
-Vous pouvez modifier le dessin du labyrinthe en créant ou modifiant un fichier dans le sous-répertoire data/map
+Vous pouvez modifier les dessin des labyrinthes en créant ou modifiant un fichier dans le sous-répertoire data/map
 Il vous faudra ensuite éventuellement modifier les informations des paramètres du jeu (cf ci-dessous)
 
 
@@ -19,7 +19,7 @@ Dans le sous-répertoire config vous retrouverez le fichier pour modifier les pa
 - le nombre des cases du jeu (attention, il doit correspondre au dessin de votre labyrinthe contenu dans data/map)
 - la taille des cases du jeu
 - le titre du jeu
-- le chemin d'accès au dessin du labyrinthe (contenu dans data/map)
+- le chemin d'accès aux dessins des labyrinthes (contenu dans data/map)
 - les caractères spéciaux représentant les éléments du labyrinthe
 - les chemins des différentes images utilisées pour représenter les éléments du labyrinthe (personnages, cases, objets...)
 
