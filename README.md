@@ -9,7 +9,7 @@ Dans le cadre du parcours de formation Développeur d’application - Python, no
 
 Modification des structures possibles du labyrinthe :
 
-Vous pouvez modifier les structures des labyrinthes en créant ou modifiant les fichiers dans le sous-répertoire data/map. L'un d'eux sera généré de manière aléatoire au lancement du jeu.
+Vous pouvez modifier les structures des labyrinthes en créant ou modifiant les fichiers dans le sous-répertoire data/maps. L'un d'eux sera généré de manière aléatoire au lancement du jeu.
 Il vous faudra ensuite éventuellement modifier les informations des paramètres du jeu (cf ci-dessous)
 
 
@@ -19,9 +19,10 @@ Dans le sous-répertoire config vous retrouverez le fichier pour modifier les pa
 - le nombre de cases du jeu (attention, il doit correspondre au dessin de votre labyrinthe contenu dans data/map)
 - la taille des cases du jeu
 - le titre du jeu
-- les chemins d'accès aux dessins des labyrinthes (compléter la liste MAPFILES dans data/map)
+- les chemins d'accès aux structures des labyrinthes
+  (compléter la liste MAPFILES dans data/maps)
 - les caractères spéciaux représentant les éléments du labyrinthe
-- les chemins des différentes images utilisées pour représenter les éléments du labyrinthe (personnages, cases, objets...)
+- les chemins des différentes images utilisées pour représenter les éléments du labyrinthe    (personnages, cases, objets...)
 
 
 Have fun !
