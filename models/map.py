@@ -26,17 +26,17 @@ class Map:
 
     def load_from_file(self):
         """load datafile containing the shape of the map"""
-        with open(self.filename) as f:
-            for y, line in enumerate(f):
+        with open(self.filename) as file:
+            for y, line in enumerate(file):
                 # y axis
-                for x, c in enumerate(line):
+                for x, col in enumerate(line):
                     #  x axis
-                    if c == constants.PATH_CHAR:
+                    if col == constants.PATH_CHAR:
                         # if character correspond to PATH_CHAR constant defined in settings
                         # add a Position instance in the attribute paths
                         self.paths.append\
                             (Position(x*constants.SPRITES_SIZE, y*constants.SPRITES_SIZE))
-                    elif c == constants.START_GAME:
+                    elif col == constants.START_GAME:
                         # if character correspond to START_GAME constant defined in settings
                         # add a Position instance in the attribute start
                         # and add a Position instance in the attribute path
@@ -45,7 +45,7 @@ class Map:
                             (Position(x*constants.SPRITES_SIZE, y*constants.SPRITES_SIZE))
                         self.start.append\
                             (Position(x*constants.SPRITES_SIZE, y*constants.SPRITES_SIZE))
-                    elif c == constants.GOAL_CHAR:
+                    elif col == constants.GOAL_CHAR:
                         # if character correspond to GOAL_CHAR constant defined in settings
                         # add a Position instance in the attribute goal
                         # and add a Position instance in the attribute path
@@ -54,7 +54,7 @@ class Map:
                             (Position(x*constants.SPRITES_SIZE, y*constants.SPRITES_SIZE))
                         self.goal.append\
                             (Position(x*constants.SPRITES_SIZE, y*constants.SPRITES_SIZE))
-                    elif c == constants.WALL_CHAR:
+                    elif col == constants.WALL_CHAR:
                         # if character correspond to WALL_CHAR constant defined in settings
                         # add a Position instance in the attribute walls
                         self.walls.append\

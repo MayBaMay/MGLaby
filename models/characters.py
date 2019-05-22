@@ -9,11 +9,11 @@ import config.settings as constants
 class Characters:
     """ Generate a character """
 
-    def __init__(self, map):
+    def __init__(self, mase):
         """ initialisation class Characters"""
-        self.map = map
-        self.position = self.map.start[0]
-        # default value self.map.start, will be different for the guard
+        self.mase = mase
+        self.position = self.mase.start[0]
+        # default value self.mase.start, will be different for the guard
 
     @property
     def get_position(self):
@@ -33,16 +33,16 @@ class Characters:
 class Hero(Characters):
     """ Generate the Hero of the game : MacGyver! """
 
-    def __init__(self, map):
+    def __init__(self, mase):
         """ initialisation class Hero"""
-        super().__init__(map)
+        Characters.__init__(self, mase)
 
     def move(self, direction):
-        """ function for hero's movements in the map"""
+        """ function for hero's movements in the mase"""
         new_position = getattr(self.position, direction)()
         # getattr allows acces to object's properties with a string
         # ex : getattr(self.position, "up") = call the method up on self.position
-        if new_position in self.map:
+        if new_position in self.mase:
             # returns to function Map.__contains__ which had been limited to paths
             self.position = new_position
             # don't add an else cause if it's not in a path, self.position stay the same
@@ -51,6 +51,6 @@ class Hero(Characters):
 class Guard(Characters):
     """ Generate the guard blocking the exit door """
 
-    def __init__(self, map):
-        super().__init__(map)
-        self.position = self.map.goal[0]
+    def __init__(self, mase):
+        super().__init__(mase)
+        self.position = self.mase.goal[0]

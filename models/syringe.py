@@ -1,6 +1,6 @@
 """ This module generates elements for the syringe
 MacGyver has to make it with a needle, a small plastic tube and ether
-Those elements will be found on the map randomly
+Those elements will be found on the mase randomly
 They will be used to distract the guard at the exit door"""
 
 from random import randrange
@@ -14,8 +14,8 @@ from models.position import Position
 class Syringe:
     """Generates elements for the syringe"""
 
-    def __init__(self, map, hero):
-        self.map = map
+    def __init__(self, mase, hero):
+        self.mase = mase
         self.hero = hero
         self.objects = ['needle', 'tube', 'ether']
         self.componants = {}
@@ -30,38 +30,38 @@ class Syringe:
         They shouldn't be outside a path neither then at the same place
         of an other or start and goal postition """
         places = []            # used positions checking list
-        for object in self.objects:
+        for elt in self.objects:
             while 1:
                 randrange_x = randrange(0, constants.LAST_POS, constants.SPRITES_SIZE)
                 randrange_y = randrange(0, constants.LAST_POS, constants.SPRITES_SIZE)
                 place = Position(randrange_x, randrange_y)
-                if place in self.map:            # check in available sprites (paths)
-                    if place not in self.map.start:     # check out of start sprite
-                        if place not in self.map.goal:      # check out of goal sprite
+                if place in self.mase:            # check in available sprites (paths)
+                    if place not in self.mase.start:     # check out of start sprite
+                        if place not in self.mase.goal:      # check out of goal sprite
                             if place not in places:              # check not already used sprite
                                 break
             places.append(place)
             infos = [place, False]
-            self.componants[object] = infos
+            self.componants[elt] = infos
 
     @property
     def objects_positions(self):
         """ returns all the class_objects positions"""
         pos = []            # get positions only
-        for object in self.objects:
-            if isinstance(self.componants[object][0], Position):
-                p = self.componants[object][0].get_position
-                pos.append(p)
+        for elt in self.objects:
+            if isinstance(self.componants[elt][0], Position):
+                coord = self.componants[elt][0].get_position
+                pos.append(coord)
             else:
-                pos.append(self.componants[object][0])
+                pos.append(self.componants[elt][0])
         return pos
 
     @property
     def get_flags(self):
         """ returns flags allowing to check if the hero passed through the sprite already"""
         flags = []      # list of flags which are True if the hero picked the object
-        for object in self.objects:
-            flags.append(self.componants[object][1])
+        for elt in self.objects:
+            flags.append(self.componants[elt][1])
         return flags
 
     def interaction_hero(self):
@@ -71,6 +71,7 @@ class Syringe:
                 if info[0].get_position == self.hero.get_position:
                     self.componants[componant] = ['off', True]
                     return componant
+        return None
 
     def check_making(self):
         """ check if all the componant have been picked up"""
@@ -78,6 +79,7 @@ class Syringe:
         if False not in flags:         #so if the hero found all the componants
             self.syringe = True
             return True
+        return False
 
     def view_objects(self, window):
         """ generates objects in the pygame window

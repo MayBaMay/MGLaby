@@ -52,17 +52,17 @@ def found_guard(window, hero, guard, syringe):
             time.sleep(2)
             game_loop()     # the game reset
 
-def text_objects(text, font, color):
+def text_objects(text, font, col):
     """ this function returns elements needed for a message """
-    textSurf = font.render(text, True, color)
-    return textSurf, textSurf.get_rect()
+    text_surf = font.render(text, True, col)
+    return text_surf, text_surf.get_rect()
 
-def message(window, text, color, size=20):
+def message(window, text, col, size=20):
     """" this function allows the message to be printed on screen """
-    infoText = pygame.font.Font(None, size)
-    textSurf, textRect = text_objects(text, infoText, color)
-    textRect.center = ((constants.WINDOW_SIDE/2), (constants.WINDOW_SIDE/2))
-    window.blit(textSurf, textRect)
+    info_text = pygame.font.Font(None, size)
+    text_surf, text_rect = text_objects(text, info_text, col)
+    text_rect.center = ((constants.WINDOW_SIDE/2), (constants.WINDOW_SIDE/2))
+    window.blit(text_surf, text_rect)
     pygame.display.flip()
 
 
@@ -76,14 +76,14 @@ def game_loop():
 
     # create map, characters and objects
     mapfile = constants.MAPFILES[randint(0,len(constants.MAPFILES)-1)]
-    map = Map(mapfile)
-    map.view_map(window)
-    hero = Hero(map)
+    mase = Map(mapfile)
+    mase.view_map(window)
+    hero = Hero(mase)
     hero.view_character(window, constants.IMG_HERO)
-    guard = Guard(map)
+    guard = Guard(mase)
     guard.view_character(window, constants.IMG_GUARD)
-    sy = Syringe(map, hero)
-    sy.view_objects(window)
+    syr = Syringe(mase, hero)
+    syr.view_objects(window)
     pygame.display.flip()
 
     game = True
@@ -106,13 +106,13 @@ def game_loop():
                     hero.move('down')
 
                 # reload visuels after event
-                map.view_map(window)
+                mase.view_map(window)
                 guard.view_character(window, constants.IMG_GUARD)
                 hero.view_character(window, constants.IMG_HERO)
 
                 # check hero's interacion with objects and characters
-                get_syringe(window, hero, sy)
-                found_guard(window, hero, guard, sy)
+                get_syringe(window, hero, syr)
+                found_guard(window, hero, guard, syr)
 
                 pygame.display.flip()       # refresh window with new elements
 
